@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SorocaTune Admin</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a; --bg2: #111; --bg3: #161616; --bg4: #1a1a1a;
+      --border: #222; --border2: #333;
+      --text: #f5f5f5; --text2: #999; --text3: #666;
+      --accent: #ff6b00; --accent2: #ff8533; --accent-glow: rgba(255,107,0,0.15);
+      --success: #22c55e; --danger: #ef4444; --warning: #f59e0b;
+      --radius: 10px; --font: 'Inter', -apple-system, sans-serif;
+    }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; }
+    
+    /* Login */
+    .login-wrap {
+      display: flex; align-items: center; justify-content: center; min-height: 100vh;
+    }
+    .login-box {
+      background: var(--bg3); border: 1px solid var(--border); border-radius: 16px;
+      padding: 40px; width: 100%; max-width: 380px; text-align: center;
+    }
+    .login-box h1 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
+    .login-box h1 span { color: var(--accent); }
+    .login-box p { color: var(--text2); font-size: 0.85rem; margin-bottom: 24px; }
+    .login-box input {
+      width: 100%; padding: 12px 16px; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--text); font-size: 0.95rem; font-family: var(--font);
+      margin-bottom: 12px; transition: border-color 200ms;
+    }
+    .login-box input:focus { outline: none; border-color: var(--accent); }
+    .login-box button {
+      width: 100%; padding: 12px; background: var(--accent); color: #fff; border: none;
+      border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer;
+      transition: background 200ms, transform 200ms;
+    }
+    .login-box button:hover { background: var(--accent2); }
+    .login-box button:active { transform: scale(0.97); }
+    .login-error { color: var(--danger); font-size: 0.85rem; margin-top: 12px; display: none; }
+    
+    /* Dashboard */
+    .admin { display: none; }
+    .admin.active { display: block; }
+    .login-wrap.hidden { display: none; }
+    
+    .admin-header {
+      background: var(--bg2); border-bottom: 1px solid var(--border);
+      padding: 16px 24px; display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .admin-header h2 { font-size: 1.1rem; font-weight: 700; }
+    .admin-header h2 span { color: var(--accent); }
+    .admin-header button {
+      padding: 8px 16px; background: transparent; border: 1px solid var(--border);
+      color: var(--text2); border-radius: 8px; cursor: pointer; font-size: 0.85rem;
+      font-family: var(--font); transition: border-color 200ms, color 200ms;
+    }
+    .admin-header button:hover { border-color: var(--danger); color: var(--danger); }
+    
+    .admin-body { max-width: 1000px; margin: 0 auto; padding: 24px; }
+    
+    /* Stats cards */
+    .dash-stats {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px; margin-bottom: 32px;
+    }
+    .dash-stat {
+      background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 20px; text-align: center;
+    }
+    .dash-stat .num { font-size: 2rem; font-weight: 800; color: var(--accent); }
+    .dash-stat .lbl { font-size: 0.8rem; color: var(--text2); margin-top: 4px; }
+    
+    /* Tabs */
+    .tabs {
+      display: flex; gap: 4px; background: var(--bg2); border-radius: var(--radius);
+      padding: 4px; margin-bottom: 24px;
+    }
+    .tab-btn {
+      flex: 1; padding: 10px; background: transparent; border: none; color: var(--text2);
+      font-size: 0.85rem; font-weight: 600; cursor: pointer; border-radius: 8px;
+      font-family: var(--font); transition: background 200ms, color 200ms;
+    }
+    .tab-btn.active { background: var(--bg3); color: var(--text); }
+    .tab-btn:hover { color: var(--text); }
+    
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    
+    /* Table */
+    .data-table {
+      width: 100%; border-collapse: collapse; background: var(--bg3);
+      border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+    }
+    .data-table th, .data-table td {
+      padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border);
+    }
+    .data-table th {
+      background: var(--bg2); font-size: 0.8rem; color: var(--text2);
+      text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;
+    }
+    .data-table td { font-size: 0.9rem; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: var(--bg4); }
+    
+    .badge {
+      display: inline-block; padding: 3px 10px; border-radius: 100px;
+      font-size: 0.75rem; font-weight: 600;
+    }
+    .badge-pending { background: rgba(245,158,11,0.15); color: var(--warning); }
+    .badge-done { background: rgba(34,197,94,0.15); color: var(--success); }
+    .badge-cancelled { background: rgba(239,68,68,0.15); color: var(--danger); }
+    
+    .btn-sm {
+      padding: 6px 12px; border: 1px solid var(--border); background: transparent;
+      color: var(--text2); border-radius: 6px; cursor: pointer; font-size: 0.8rem;
+      font-family: var(--font); transition: all 200ms;
+    }
+    .btn-sm:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-sm.danger:hover { border-color: var(--danger); color: var(--danger); }
+    .btn-sm.success:hover { border-color: var(--success); color: var(--success); }
+    
+    /* Empty state */
+    .empty { text-align: center; padding: 48px; color: var(--text3); }
+    .empty .icon { font-size: 3rem; margin-bottom: 12px; }
+    .empty p { font-size: 0.9rem; }
+    
+    /* Form modal */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200;
+      display: none; align-items: center; justify-content: center; padding: 24px;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+      background: var(--bg3); border: 1px solid var(--border); border-radius: 16px;
+      padding: 32px; width: 100%; max-width: 500px; max-height: 90vh; overflow-y: auto;
+    }
+    .modal h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 20px; }
+    .modal .field { margin-bottom: 16px; }
+    .modal label {
+      display: block; font-size: 0.8rem; color: var(--text2); margin-bottom: 6px; font-weight: 500;
+    }
+    .modal input, .modal select, .modal textarea {
+      width: 100%; padding: 10px 14px; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--text); font-size: 0.9rem; font-family: var(--font);
+    }
+    .modal input:focus, .modal select:focus, .modal textarea:focus {
+      outline: none; border-color: var(--accent);
+    }
+    .modal textarea { min-height: 80px; resize: vertical; }
+    .modal-actions {
+      display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;
+    }
+    .modal-actions button {
+      padding: 10px 20px; border-radius: 8px; font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; font-family: var(--font); transition: all 200ms;
+    }
+    .btn-cancel {
+      background: transparent; border: 1px solid var(--border); color: var(--text2);
+    }
+    .btn-cancel:hover { border-color: var(--text3); }
+    .btn-save {
+      background: var(--accent); border: none; color: #fff;
+    }
+    .btn-save:hover { background: var(--accent2); }
+    .btn-save:active { transform: scale(0.97); }
+    
+    /* Responsive */
+    @media (max-width: 640px) {
+      .admin-body { padding: 16px; }
+      .dash-stats { grid-template-columns: 1fr 1fr; }
+      .data-table { font-size: 0.8rem; }
+      .data-table th, .data-table td { padding: 8px 10px; }
+      .modal { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div class="login-wrap" id="loginWrap">
+    <div class="login-box">
+      <h1>SOROCA<span>TUNE</span></h1>
+      <p>Admin Panel — Autentificare</p>
+      <input type="password" id="loginPass" placeholder="Parola" autofocus>
+      <button onclick="doLogin()">Intră</button>
+      <div class="login-error" id="loginError">❌ Parolă greșită</div>
+    </div>
+  </div>
+
+  <!-- ADMIN DASHBOARD -->
+  <div class="admin" id="adminPanel">
+    <div class="admin-header">
+      <h2>SOROCA<span>TUNE</span> Admin</h2>
+      <button onclick="doLogout()">🔒 Ieși</button>
+    </div>
+    <div class="admin-body">
+      
+      <!-- Quick Stats -->
+      <div class="dash-stats">
+        <div class="dash-stat">
+          <div class="num" id="statBookings">0</div>
+          <div class="lbl">Programări</div>
+        </div>
+        <div class="dash-stat">
+          <div class="num" id="statPending">0</div>
+          <div class="lbl">În așteptare</div>
+        </div>
+        <div class="dash-stat">
+          <div class="num" id="statDone">0</div>
+          <div class="lbl">Finalizate</div>
+        </div>
+        <div class="dash-stat">
+          <div class="num" id="statMessages">0</div>
+          <div class="lbl">Mesaje</div>
+        </div>
+      </div>
+      
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('bookings')">📋 Programări</button>
+        <button class="tab-btn" onclick="switchTab('results')">🏆 Rezultate</button>
+        <button class="tab-btn" onclick="switchTab('reviews')">⭐ Recenzii</button>
+        <button class="tab-btn" onclick="switchTab('settings')">⚙️ Setări</button>
+      </div>
+      
+      <!-- TAB: Bookings -->
+      <div class="tab-content active" id="tab-bookings">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <h3 style="font-size:1rem;font-weight:600">Toate programările</h3>
+          <button class="btn-sm" onclick="exportData('bookings')">📥 Export CSV</button>
+        </div>
+        <div id="bookingsList"></div>
+      </div>
+      
+      <!-- TAB: Results -->
+      <div class="tab-content" id="tab-results">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <h3 style="font-size:1rem;font-weight:600">Rezultate Before & After</h3>
+          <button class="btn-sm" onclick="openModal('result')">+ Adaugă Rezultat</button>
+        </div>
+        <div id="resultsList"></div>
+      </div>
+      
+      <!-- TAB: Reviews -->
+      <div class="tab-content" id="tab-reviews">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <h3 style="font-size:1rem;font-weight:600">Recenzii Clienți</h3>
+          <button class="btn-sm" onclick="openModal('review')">+ Adaugă Recenzie</button>
+        </div>
+        <div id="reviewsList"></div>
+      </div>
+      
+      <!-- TAB: Settings -->
+      <div class="tab-content" id="tab-settings">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:16px">Setări Site</h3>
+        <div class="modal" style="max-width:100%;border:none;padding:0">
+          <div class="field">
+            <label>Parolă Admin</label>
+            <input type="password" id="newPass" placeholder="Parolă nouă">
+          </div>
+          <div class="field">
+            <label>Telefon / WhatsApp</label>
+            <input type="text" id="setPhone" placeholder="067 515 744">
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" id="setEmail" placeholder="sorocatune@gmail.com">
+          </div>
+          <div class="field">
+            <label>Număr mașini tunate</label>
+            <input type="number" id="setCars" placeholder="100">
+          </div>
+          <div style="margin-top:20px">
+            <button class="btn-save" onclick="saveSettings()" style="padding:10px 24px">Salvează Setări</button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <!-- MODAL: Add Result -->
+  <div class="modal-overlay" id="modalResult">
+    <div class="modal">
+      <h3>Adaugă Rezultat</h3>
+      <div class="field"><label>Mașina</label><input type="text" id="resCar" placeholder="Ex: BMW 320d 190CP"></div>
+      <div class="field"><label>CP Înainte</label><input type="number" id="resCpBefore" placeholder="190"></div>
+      <div class="field"><label>CP După</label><input type="number" id="resCpAfter" placeholder="240"></div>
+      <div class="field"><label>Nm Înainte</label><input type="number" id="resNmBefore" placeholder="400"></div>
+      <div class="field"><label>Nm După</label><input type="number" id="resNmAfter" placeholder="490"></div>
+      <div class="field"><label>Serviciu</label>
+        <select id="resService">
+          <option>Stage 1</option><option>Stage 2</option><option>Stage 3+</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeModal('result')">Anulează</button>
+        <button class="btn-save" onclick="saveResult()">Salvează</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- MODAL: Add Review -->
+  <div class="modal-overlay" id="modalReview">
+    <div class="modal">
+      <h3>Adaugă Recenzie</h3>
+      <div class="field"><label>Nume Client</label><input type="text" id="revName" placeholder="Andrei M."></div>
+      <div class="field"><label>Mașina</label><input type="text" id="revCar" placeholder="BMW 320d 190CP"></div>
+      <div class="field"><label>Stele (1-5)</label><input type="number" id="revStars" min="1" max="5" value="5"></div>
+      <div class="field"><label>Text Recenzie</label><textarea id="revText" placeholder="Recenzia clientului..."></textarea></div>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeModal('review')">Anulează</button>
+        <button class="btn-save" onclick="saveReview()">Salvează</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== AUTH =====
+    const DEFAULT_PASS = 'soroca2025';
+    
+    function getPass() {
+      return localStorage.getItem('st_pass') || DEFAULT_PASS;
+    }
+    
+    function doLogin() {
+      const pass = document.getElementById('loginPass').value;
+      if (pass === getPass()) {
+        localStorage.setItem('st_auth', '1');
+        showAdmin();
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+        setTimeout(() => document.getElementById('loginError').style.display = 'none', 3000);
+      }
+    }
+    
+    function doLogout() {
+      localStorage.removeItem('st_auth');
+      document.getElementById('adminPanel').classList.remove('active');
+      document.getElementById('loginWrap').classList.remove('hidden');
+      document.getElementById('loginPass').value = '';
+    }
+    
+    function showAdmin() {
+      document.getElementById('loginWrap').classList.add('hidden');
+      document.getElementById('adminPanel').classList.add('active');
+      loadAll();
+    }
+    
+    // Auto-login
+    if (localStorage.getItem('st_auth') === '1') showAdmin();
+    
+    document.getElementById('loginPass').addEventListener('keydown', e => {
+      if (e.key === 'Enter') doLogin();
+    });
+    
+    // ===== DATA =====
+    function getData(key) {
+      try { return JSON.parse(localStorage.getItem(key)) || []; }
+      catch { return []; }
+    }
+    function setData(key, data) {
+      localStorage.setItem(key, JSON.stringify(data));
+    }
+    function getSettings() {
+      return JSON.parse(localStorage.getItem('st_settings') || '{}');
+    }
+    
+    // ===== TABS =====
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      document.getElementById('tab-' + tab).classList.add('active');
+      event.target.classList.add('active');
+    }
+    
+    // ===== LOAD =====
+    function loadAll() {
+      loadBookings();
+      loadResults();
+      loadReviews();
+      loadSettings();
+      updateStats();
+    }
+    
+    function updateStats() {
+      const bookings = getData('st_bookings');
+      document.getElementById('statBookings').textContent = bookings.length;
+      document.getElementById('statPending').textContent = bookings.filter(b => b.status === 'pending').length;
+      document.getElementById('statDone').textContent = bookings.filter(b => b.status === 'done').length;
+      document.getElementById('statMessages').textContent = bookings.filter(b => b.message).length;
+    }
+    
+    // ===== BOOKINGS =====
+    function loadBookings() {
+      const bookings = getData('st_bookings');
+      const el = document.getElementById('bookingsList');
+      
+      if (!bookings.length) {
+        el.innerHTML = '<div class="empty"><div class="icon">📋</div><p>Nicio programare încă. Când clienții completează formularul, apar aici.</p></div>';
+        return;
+      }
+      
+      let html = '<table class="data-table"><thead><tr><th>Dată</th><th>Nume</th><th>Telefon</th><th>Mașina</th><th>Serviciu</th><th>Status</th><th>Acțiuni</th></tr></thead><tbody>';
+      bookings.slice().reverse().forEach((b, i) => {
+        const idx = bookings.length - 1 - i;
+        const statusClass = b.status === 'done' ? 'badge-done' : b.status === 'cancelled' ? 'badge-cancelled' : 'badge-pending';
+        const statusText = b.status === 'done' ? 'Finalizat' : b.status === 'cancelled' ? 'Anulat' : 'În așteptare';
+        html += `<tr>
+          <td>${b.date || '-'}</td>
+          <td>${b.name || '-'}</td>
+          <td>${b.phone ? '<a href="tel:'+b.phone+'" style="color:var(--accent)">'+b.phone+'</a>' : '-'}</td>
+          <td>${b.car || '-'}</td>
+          <td>${b.service || '-'}</td>
+          <td><span class="badge ${statusClass}">${statusText}</span></td>
+          <td>
+            ${b.status === 'pending' ? `<button class="btn-sm success" onclick="updateBooking(${idx},'done')">✓</button> <button class="btn-sm danger" onclick="updateBooking(${idx},'cancelled')">✗</button>` : ''}
+            ${b.phone ? `<a class="btn-sm" href="https://wa.me/373${b.phone.replace(/\s/g,'')}" target="_blank" style="text-decoration:none">💬</a>` : ''}
+            <button class="btn-sm danger" onclick="deleteBooking(${idx})">🗑</button>
+          </td>
+        </tr>`;
+      });
+      html += '</tbody></table>';
+      el.innerHTML = html;
+    }
+    
+    function updateBooking(idx, status) {
+      const bookings = getData('st_bookings');
+      bookings[idx].status = status;
+      setData('st_bookings', bookings);
+      loadAll();
+    }
+    
+    function deleteBooking(idx) {
+      if (!confirm('Sigur vrei să ștergi această programare?')) return;
+      const bookings = getData('st_bookings');
+      bookings.splice(idx, 1);
+      setData('st_bookings', bookings);
+      loadAll();
+    }
+    
+    // ===== RESULTS =====
+    function loadResults() {
+      const results = getData('st_results');
+      const el = document.getElementById('resultsList');
+      
+      if (!results.length) {
+        el.innerHTML = '<div class="empty"><div class="icon">🏆</div><p>Niciun rezultat adăugat. Apasă "Adaugă Rezultat" pentru a adăuga.</p></div>';
+        return;
+      }
+      
+      let html = '<table class="data-table"><thead><tr><th>Mașina</th><th>CP</th><th>Nm</th><th>Serviciu</th><th>Acțiuni</th></tr></thead><tbody>';
+      results.forEach((r, i) => {
+        html += `<tr>
+          <td>${r.car}</td>
+          <td>${r.cpBefore} → <strong style="color:var(--accent)">${r.cpAfter}</strong> <small style="color:var(--success)">(+${r.cpAfter - r.cpBefore})</small></td>
+          <td>${r.nmBefore} → <strong style="color:var(--accent)">${r.nmAfter}</strong> <small style="color:var(--success)">(+${r.nmAfter - r.nmBefore})</small></td>
+          <td>${r.service}</td>
+          <td><button class="btn-sm danger" onclick="deleteResult(${i})">🗑</button></td>
+        </tr>`;
+      });
+      html += '</tbody></table>';
+      el.innerHTML = html;
+    }
+    
+    function saveResult() {
+      const result = {
+        car: document.getElementById('resCar').value,
+        cpBefore: parseInt(document.getElementById('resCpBefore').value),
+        cpAfter: parseInt(document.getElementById('resCpAfter').value),
+        nmBefore: parseInt(document.getElementById('resNmBefore').value),
+        nmAfter: parseInt(document.getElementById('resNmAfter').value),
+        service: document.getElementById('resService').value
+      };
+      if (!result.car || !result.cpBefore || !result.cpAfter) return alert('Completează toate câmpurile!');
+      const results = getData('st_results');
+      results.push(result);
+      setData('st_results', results);
+      closeModal('result');
+      loadAll();
+      // Clear form
+      ['resCar','resCpBefore','resCpAfter','resNmBefore','resNmAfter'].forEach(id => document.getElementById(id).value = '');
+    }
+    
+    function deleteResult(i) {
+      if (!confirm('Sigur vrei să ștergi?')) return;
+      const results = getData('st_results');
+      results.splice(i, 1);
+      setData('st_results', results);
+      loadAll();
+    }
+    
+    // ===== REVIEWS =====
+    function loadReviews() {
+      const reviews = getData('st_reviews');
+      const el = document.getElementById('reviewsList');
+      
+      if (!reviews.length) {
+        el.innerHTML = '<div class="empty"><div class="icon">⭐</div><p>Nicio recenzie. Adaugă recenzii de la clienți.</p></div>';
+        return;
+      }
+      
+      let html = '<table class="data-table"><thead><tr><th>Client</th><th>Mașina</th><th>Stele</th><th>Recenzie</th><th>Acțiuni</th></tr></thead><tbody>';
+      reviews.forEach((r, i) => {
+        const stars = '★'.repeat(r.stars) + '☆'.repeat(5 - r.stars);
+        html += `<tr>
+          <td>${r.name}</td>
+          <td>${r.car}</td>
+          <td style="color:#fbbf24">${stars}</td>
+          <td style="max-width:300px;font-style:italic;color:var(--text2)">${r.text}</td>
+          <td><button class="btn-sm danger" onclick="deleteReview(${i})">🗑</button></td>
+        </tr>`;
+      });
+      html += '</tbody></table>';
+      el.innerHTML = html;
+    }
+    
+    function saveReview() {
+      const review = {
+        name: document.getElementById('revName').value,
+        car: document.getElementById('revCar').value,
+        stars: parseInt(document.getElementById('revStars').value) || 5,
+        text: document.getElementById('revText').value
+      };
+      if (!review.name || !review.text) return alert('Completează numele și textul!');
+      const reviews = getData('st_reviews');
+      reviews.push(review);
+      setData('st_reviews', reviews);
+      closeModal('review');
+      loadAll();
+      ['revName','revCar','revStars','revText'].forEach(id => document.getElementById(id).value = '');
+    }
+    
+    function deleteReview(i) {
+      if (!confirm('Sigur vrei să ștergi?')) return;
+      const reviews = getData('st_reviews');
+      reviews.splice(i, 1);
+      setData('st_reviews', reviews);
+      loadAll();
+    }
+    
+    // ===== SETTINGS =====
+    function loadSettings() {
+      const s = getSettings();
+      if (s.phone) document.getElementById('setPhone').value = s.phone;
+      if (s.email) document.getElementById('setEmail').value = s.email;
+      if (s.cars) document.getElementById('setCars').value = s.cars;
+    }
+    
+    function saveSettings() {
+      const s = getSettings();
+      const newPass = document.getElementById('newPass').value;
+      s.phone = document.getElementById('setPhone').value;
+      s.email = document.getElementById('setEmail').value;
+      s.cars = document.getElementById('setCars').value;
+      localStorage.setItem('st_settings', JSON.stringify(s));
+      if (newPass) localStorage.setItem('st_pass', newPass);
+      alert('✅ Setări salvate!');
+    }
+    
+    // ===== MODALS =====
+    function openModal(type) {
+      document.getElementById('modal' + type.charAt(0).toUpperCase() + type.slice(1)).classList.add('show');
+    }
+    function closeModal(type) {
+      document.getElementById('modal' + type.charAt(0).toUpperCase() + type.slice(1)).classList.remove('show');
+    }
+    
+    // Close modal on overlay click
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', e => {
+        if (e.target === overlay) overlay.classList.remove('show');
+      });
+    });
+    
+    // ===== EXPORT =====
+    function exportData(type) {
+      const data = getData('st_' + type);
+      if (!data.length) return alert('Nu sunt date de exportat.');
+      
+      let csv = '';
+      const headers = Object.keys(data[0]);
+      csv += headers.join(',') + '\n';
+      data.forEach(row => {
+        csv += headers.map(h => '"' + (row[h] || '').toString().replace(/"/g, '""') + '"').join(',') + '\n';
+      });
+      
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = type + '_' + new Date().toISOString().slice(0,10) + '.csv';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>

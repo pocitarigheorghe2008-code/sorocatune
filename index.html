@@ -1029,7 +1029,7 @@
     <div class="container">
       <div class="stats-grid">
         <div class="stat-item reveal">
-          <div class="stat-number"><span class="counter" data-target="500">0</span>+</div>
+          <div class="stat-number"><span class="counter" data-target="100">0</span>+</div>
           <div class="stat-label">Mașini Tunate</div>
         </div>
         <div class="stat-item reveal reveal-delay-1">
@@ -1593,12 +1593,28 @@
       const form = e.target;
       const btn = form.querySelector('.btn-submit');
       const toast = document.getElementById('formToast');
+      const fields = form.querySelectorAll('input, select, textarea');
+      
+      // Collect form data
+      const booking = {
+        name: fields[0].value,
+        phone: fields[1].value,
+        car: fields[2].value,
+        service: fields[3].value,
+        message: fields[4] ? fields[4].value : '',
+        date: new Date().toLocaleDateString('ro-RO'),
+        status: 'pending'
+      };
       
       btn.textContent = '⏳ Se trimite...';
       btn.disabled = true;
       
-      // Simulate send (replace with actual endpoint)
       setTimeout(() => {
+        // Save to localStorage (admin reads from here)
+        const bookings = JSON.parse(localStorage.getItem('st_bookings') || '[]');
+        bookings.push(booking);
+        localStorage.setItem('st_bookings', JSON.stringify(bookings));
+        
         toast.classList.add('show');
         btn.textContent = '✅ Trimis!';
         form.reset();

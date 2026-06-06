@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SorocaTune — Chip Tuning Profesional în Soroca, Moldova. Stage 1, Stage 2, Stage 3+. Reprogramare ECU cu garanție. +15-60% cai putere.">
+  <meta name="keywords" content="chip tuning, soroca, moldova, stage 1, stage 2, ECU remap, reprogramare, tuning auto, dpf delete, egr delete">
+  <meta name="author" content="SorocaTune">
+  <meta property="og:title" content="SorocaTune — Chip Tuning Profesional Soroca">
+  <meta property="og:description" content="Deblochează potențialul mașinii tale. +15-60% cai putere. Reprogramare ECU profesională cu garanție.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sorocatune.md">
+  <meta property="og:image" content="og-image.jpg">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>SorocaTune — Chip Tuning Profesional în Soroca, Moldova</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏎️</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       SOROCATUNE — DARK AUTOMOTIVE THEME
+       ======================================== */
+    
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #111111;
+      --bg-card: #161616;
+      --bg-card-hover: #1a1a1a;
+      --border: #222222;
+      --border-hover: #333333;
+      --text-primary: #f5f5f5;
+      --text-secondary: #999999;
+      --text-muted: #666666;
+      --accent: #ff6b00;
+      --accent-hover: #ff8533;
+      --accent-glow: rgba(255, 107, 0, 0.15);
+      --accent-glow-strong: rgba(255, 107, 0, 0.3);
+      --success: #22c55e;
+      --danger: #ef4444;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --radius-lg: 16px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,0.6);
+      --transition: 200ms ease-out;
+      --transition-slow: 400ms ease-out;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    
+    body {
+      font-family: var(--font);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+    
+    /* ===== ANIMATIONS ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 80ms; }
+    .reveal-delay-2 { transition-delay: 160ms; }
+    .reveal-delay-3 { transition-delay: 240ms; }
+    .reveal-delay-4 { transition-delay: 320ms; }
+    .reveal-delay-5 { transition-delay: 400ms; }
+    
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px var(--accent-glow); }
+      50% { box-shadow: 0 0 40px var(--accent-glow-strong); }
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    @keyframes count-up {
+      from { opacity: 0; transform: scale(0.5); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .reveal-delay-1, .reveal-delay-2, .reveal-delay-3, .reveal-delay-4, .reveal-delay-5 { transition-delay: 0; }
+      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+    
+    /* ===== CONTAINER ===== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    /* ===== NAV ===== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .nav.scrolled {
+      border-bottom-color: var(--border);
+      background: rgba(10, 10, 10, 0.95);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+    .nav-logo {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--text-primary);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+      transition: color var(--transition);
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color var(--transition);
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width var(--transition);
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a:hover::after { width: 100%; }
+    
+    /* Mobile menu */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      margin: 5px 0;
+      transition: transform var(--transition), opacity var(--transition);
+    }
+    .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .nav-toggle.active span:nth-child(2) { opacity: 0; }
+    .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    
+    @media (max-width: 768px) {
+      .nav-toggle { display: block; }
+      .nav-links {
+        position: fixed;
+        top: 72px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        transform: translateX(100%);
+        transition: transform 0.4s var(--ease-out);
+      }
+      .nav-links.open { transform: translateX(0); }
+      .nav-links a { font-size: 1.2rem; }
+    }
+    
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 120px 24px 80px;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse 80% 50% at 50% -20%, var(--accent-glow-strong), transparent),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(255, 107, 0, 0.05), transparent),
+        radial-gradient(ellipse 60% 40% at 20% 80%, rgba(255, 60, 0, 0.05), transparent);
+      z-index: 0;
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(255,107,0,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,107,0,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 0;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(255, 107, 0, 0.2);
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+    }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--accent), #ff3300);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+    }
+    .btn:active { transform: scale(0.97); }
+    
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      box-shadow: 0 0 30px var(--accent-glow-strong);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      border-color: var(--text-muted);
+      background: rgba(255,255,255,0.03);
+    }
+    
+    /* ===== STATS ===== */
+    .stats {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-secondary);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      text-align: center;
+    }
+    .stat-item { padding: 20px; }
+    .stat-number {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: -1px;
+    }
+    .stat-number .counter { display: inline; }
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+    
+    @media (max-width: 768px) {
+      .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      .stat-number { font-size: 2rem; }
+    }
+    
+    /* ===== SECTIONS ===== */
+    section {
+      padding: 100px 0;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .section-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+    .section-desc {
+      color: var(--text-secondary);
+      max-width: 500px;
+      margin: 0 auto;
+      font-size: 1rem;
+    }
+    
+    /* ===== SERVICES ===== */
+    .services { background: var(--bg-primary); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .service-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+    .service-card:hover::before { opacity: 1; }
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+    .service-card h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .service-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+    .service-card ul {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+    .service-card ul li {
+      padding: 6px 0;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .service-card ul li::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+    .service-price {
+      font-size: 0.9rem;
+      color: var(--accent);
+      font-weight: 600;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .service-card.popular {
+      border-color: var(--accent);
+      background: linear-gradient(180deg, rgba(255,107,0,0.05), var(--bg-card));
+    }
+    .popular-badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    /* ===== RESULTS ===== */
+    .results { background: var(--bg-secondary); }
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .result-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .result-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+    .result-car {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .result-car-icon {
+      font-size: 1.8rem;
+    }
+    .result-car-name {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .result-bars { display: flex; flex-direction: column; gap: 16px; }
+    .result-bar-group {}
+    .result-bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+    .result-bar-label strong { color: var(--accent); }
+    .result-bar {
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+    }
+    .result-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), #ff3300);
+      border-radius: 3px;
+      width: 0;
+      transition: width 1.2s var(--ease-out);
+    }
+    .result-bar-fill.animated { width: var(--fill); }
+    .result-gain {
+      text-align: center;
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .result-gain span {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .result-gain small {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+    
+    /* ===== CALCULATOR ===== */
+    .calculator { background: var(--bg-primary); }
+    .calc-box {
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+    }
+    .calc-group {
+      margin-bottom: 24px;
+    }
+    .calc-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+    }
+    .calc-group select, .calc-group input {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      font-family: var(--font);
+      transition: border-color var(--transition);
+      appearance: none;
+    }
+    .calc-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23999' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+    .calc-group select:focus, .calc-group input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .calc-result {
+      background: var(--accent-glow);
+      border: 1px solid rgba(255, 107, 0, 0.2);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+      margin-top: 24px;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+    }
+    .calc-result.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .calc-result h4 {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    .calc-result .price {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--accent);
+    }
+    .calc-result .estimate {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 8px;
+    }
+    .calc-result .details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 107, 0, 0.15);
+    }
+    .calc-result .detail-item {
+      text-align: center;
+    }
+    .calc-result .detail-item .val {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .calc-result .detail-item .lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    
+    /* ===== PROCESS ===== */
+    .process { background: var(--bg-secondary); }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+    .process-step {
+      text-align: center;
+      padding: 32px 24px;
+      position: relative;
+    }
+    .process-step .step-num {
+      font-size: 4rem;
+      font-weight: 900;
+      color: rgba(255, 107, 0, 0.08);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .process-step .step-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+    .process-step h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .process-step p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+    }
+    
+    /* ===== WHY US ===== */
+    .why-us { background: var(--bg-primary); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .why-card {
+      display: flex;
+      gap: 16px;
+      padding: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: border-color var(--transition);
+    }
+    .why-card:hover { border-color: var(--border-hover); }
+    .why-card .why-icon {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+    .why-card h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .why-card p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    
+    /* ===== TESTIMONIALS ===== */
+    .testimonials { background: var(--bg-secondary); }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .testimonial-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .testimonial-stars {
+      color: #fbbf24;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+    .testimonial-text {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      font-style: italic;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--accent);
+    }
+    .testimonial-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .testimonial-car {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    
+    /* ===== GALLERY ===== */
+    .gallery { background: var(--bg-primary); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+    .gallery-item {
+      aspect-ratio: 4/3;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform var(--transition), border-color var(--transition);
+    }
+    .gallery-item:hover {
+      transform: scale(1.02);
+      border-color: var(--border-hover);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .gallery-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+    .gallery-placeholder .icon { font-size: 2rem; }
+    
+    /* ===== CONTACT ===== */
+    .contact { background: var(--bg-secondary); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+    .contact-info h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .contact-info > p {
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      font-size: 0.95rem;
+    }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .contact-item .icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .contact-item .label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+    .contact-item .value {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .contact-item .value a {
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .contact-item .value a:hover { color: var(--accent); }
+    
+    .contact-form {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: var(--text-secondary);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      font-family: var(--font);
+      transition: border-color var(--transition);
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-group select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23999' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 480px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+    .btn-submit {
+      width: 100%;
+      margin-top: 8px;
+    }
+    .form-toast {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      border-radius: var(--radius-sm);
+      color: var(--success);
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-top: 16px;
+    }
+    .form-toast.show { display: flex; }
+    
+    /* ===== FOOTER ===== */
+    .footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .footer p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+    .footer p span { color: var(--accent); font-weight: 600; }
+    
+    /* ===== WHATSAPP FLOAT ===== */
+    .wa-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 999;
+      width: 56px;
+      height: 56px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+      transition: transform var(--transition), box-shadow var(--transition);
+      animation: pulse-glow 3s infinite;
+    }
+    .wa-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 30px rgba(37, 211, 102, 0.5);
+    }
+    .wa-float:active { transform: scale(0.95); }
+    .wa-float svg { width: 28px; height: 28px; fill: #fff; }
+    
+    /* ===== BACK TO TOP ===== */
+    .back-top {
+      position: fixed;
+      bottom: 90px;
+      right: 28px;
+      z-index: 998;
+      width: 40px;
+      height: 40px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity var(--transition), transform var(--transition), background var(--transition);
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+    .back-top.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .back-top:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .back-top:active { transform: scale(0.9); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="#" class="nav-logo">SOROCA<span>TUNE</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#servicii" onclick="closeMenu()">Servicii</a></li>
+        <li><a href="#rezultate" onclick="closeMenu()">Rezultate</a></li>
+        <li><a href="#calculator" onclick="closeMenu()">Calculator</a></li>
+        <li><a href="#proces" onclick="closeMenu()">Cum lucrăm</a></li>
+        <li><a href="#recenzii" onclick="closeMenu()">Recenzii</a></li>
+        <li><a href="#contact" onclick="closeMenu()">Programează-te</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="hero-badge">🏎️ Chip Tuning Profesional</div>
+      <h1>
+        <span class="highlight">Deblochează</span><br>
+        Potențialul Mașinii Tale
+      </h1>
+      <p>Mai mulți cai. Cuplu mai mare. Consum redus. Reprogramare ECU profesională cu garanție. Rezultate simțite de la prima apăsare a pedalei.</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn btn-primary">🔧 Programează Acum</a>
+        <a href="#servicii" class="btn btn-secondary">Vezi Serviciile</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <div class="stat-number"><span class="counter" data-target="500">0</span>+</div>
+          <div class="stat-label">Mașini Tunate</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-1">
+          <div class="stat-number"><span class="counter" data-target="30">0</span>%</div>
+          <div class="stat-label">Câștig Mediu CP</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-2">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Garanție</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services" id="servicii">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label reveal">Servicii</div>
+        <h2 class="section-title reveal">Pachete de Tuning</h2>
+        <p class="section-desc reveal">Alege pachetul potrivit pentru mașina ta. Toate serviciile includ backup original și garanție.</p>
+      </div>
+      <div class="services-grid">
+        <!-- Stage 1 -->
+        <div class="service-card reveal">
+          <div class="service-icon">⚡</div>
+          <h3>Stage 1</h3>
+          <p>Reprogramare software pură. Fără modificări hardware. Rezultate imediate.</p>
+          <ul>
+            <li>+15-40% cai putere</li>
+            <li>+20-50% cuplu</li>
+            <li>Consum redus până la -1L/100km</li>
+            <li>Răspuns accelerator îmbunătățit</li>
+            <li>Garanție 12 luni</li>
+          </ul>
+          <div class="service-price">de la 150€ / sesiune</div>
+        </div>
+        <!-- Stage 2 -->
+        <div class="service-card popular reveal reveal-delay-1">
+          <div class="popular-badge">Popular</div>
+          <div class="service-icon">🔥</div>
+          <h3>Stage 2</h3>
+          <p>Software + modificări hardware minore. Performanță maximă.</p>
+          <ul>
+            <li>Tot ce include Stage 1</li>
+            <li>Downpipe sport / decat</li>
+            <li>Intake performant</li>
+            <li>+30-60% cai putere</li>
+            <li>Garanție 12 luni</li>
+          </ul>
+          <div class="service-price">de la 250€ / sesiune</div>
+        </div>
+        <!-- Stage 3+ -->
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-icon">🏆</div>
+          <h3>Stage 3+</h3>
+          <p>Tuning complet cu componente upgradate. Maxim de performanță.</p>
+          <ul>
+            <li>Turbo upgradat</li>
+            <li>Injectoare mai mari</li>
+            <li>Intercooler performant</li>
+            <li>Software custom complet</li>
+            <li>Setup personalizat</li>
+          </ul>
+          <div class="service-price">Preț la discutare</div>
+        </div>
+        <!-- Extra -->
+        <div class="service-card reveal reveal-delay-3">
+          <div class="service-icon">🛠️</div>
+          <h3>Servicii Extra</h3>
+          <p>Soluții specifice pentru optimizarea mașinii tale.</p>
+          <ul>
+            <li>DPF / FAP Delete</li>
+            <li>EGR Delete</li>
+            <li>DTC Remove (erori)</li>
+            <li>AdBlue Delete</li>
+            <li>Speed Limiter Remove</li>
+            <li>Pop & Bang (crackle)</li>
+          </ul>
+          <div class="service-price">de la 80€ / serviciu</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="results" id="rezultate">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label reveal">Rezultate</div>
+        <h2 class="section-title reveal">Before & After</h2>
+        <p class="section-desc reveal">Câteva exemple reale de mașini tunate de noi.</p>
+      </div>
+      <div class="results-grid">
+        <!-- Renault -->
+        <div class="result-card reveal">
+          <div class="result-car">
+            <span class="result-car-icon">🚗</span>
+            <span class="result-car-name">Renault 1.5 dCi</span>
+          </div>
+          <div class="result-bars">
+            <div class="result-bar-group">
+              <div class="result-bar-label"><span>CP</span><span>110 → <strong>140</strong></span></div>
+              <div class="result-bar"><div class="result-bar-fill" style="--fill: 70%"></div></div>
+            </div>
+            <div class="result-bar-group">
+              <div class="result-bar-label"><span>Nm</span><span>260 → <strong>320</strong></span></div>
+              <div class="result-bar"><div class="result-bar-fill" style="--fill: 75%"></div></div>
+            </div>
+          </div>
+          <div class="result-gain"><span>+30 CP / +60 Nm</span><small>Câștig Stage 1</small></div>
+        </div>
+        <!-- VW -->
+        <div class="result-card reveal reveal-delay-1">
+          <div class="result-car">
+            <span class="result-car-icon">🚙</span>
+            <span class="result-car-name">VW 2.0 TDI</span>
+          </div>
+          <div class="result-bars">
+            <div class="result-bar-group">
+              <div class="result-bar-label"><span>CP</span><span>150 → <strong>195</strong></span></div>
+              <div class="result-bar"><div class="result-bar-fill" style="--fill: 77%"></div></div>
+            </div>
+            <div class="result-bar-group">
+              <div class="result-bar-label"><span>Nm</span><span>340 → <strong>420</strong></span></div>
+              <div class="result-bar"><div class="result-bar-fill" style="--fill: 80%"></div></div>
+            </div>
+          </div>
+          <div class="result-gain"><span>+45 CP / +80 Nm</span><small>Câștig Stage 1</small></div>
+        </div>
+        <!-- BMW -->
+        <div class="result-card reveal reveal-delay-2">
+          <div class="result-car">
+            <span class="result-car-icon">🏎️</span>
+            <span class="result-car-name">BMW 320d</span>
+          </div>
+          <div class="result-bars">
+            <div class="result-bar-group">
+              <div class="result-bar-label"><span>CP</span><span>190 → <strong>240</strong></span></div>
+              <div class="result-bar"><div class="result-bar-fill" style="--fill: 79%"></div></div>
+            </div>
+            <div class="result-bar-group">
+              <div class="result-bar-label"><span>Nm</span><span>400 → <strong>490</strong></span></div>
+              <div class="result-bar"><div class="result-bar-fill" style="--fill: 82%"></div></div>
+            </div>
+          </div>
+          <div class="result-gain"><span>+50 CP / +90 Nm</span><small>Câștig Stage 1</small></div>
+        </div>
+        <!-- Audi -->
+        <div class="result-card reveal reveal-delay-3">
+          <div class="result-car">
+            <span class="result-car-icon">🚗</span>
+            <span class="result-car-name">Audi 2.0 TFSI</span>
+          </div>
+          <div class="result-bars">
+            <div class="result-bar-group">
+              <div class="result-bar-label"><span>CP</span><span>190 → <strong>245</strong></span></div>
+              <div class="result-bar"><div class="result-bar-fill" style="--fill: 78%"></div></div>
+            </div>
+            <div class="result-bar-group">
+              <div class="result-bar-label"><span>Nm</span><span>320 → <strong>420</strong></span></div>
+              <div class="result-bar"><div class="result-bar-fill" style="--fill: 81%"></div></div>
+            </div>
+          </div>
+          <div class="result-gain"><span>+55 CP / +100 Nm</span><small>Câștig Stage 1</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALCULATOR -->
+  <section class="calculator" id="calculator">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label reveal">Calculator</div>
+        <h2 class="section-title reveal">Estimează Prețul</h2>
+        <p class="section-desc reveal">Alege mașina și serviciul — îți zicem cât costă.</p>
+      </div>
+      <div class="calc-box reveal">
+        <div class="form-row">
+          <div class="calc-group">
+            <label>Combustibil</label>
+            <select id="calcFuel" onchange="calcPrice()">
+              <option value="">Selectează...</option>
+              <option value="diesel">Diesel</option>
+              <option value="benzina">Benzină</option>
+              <option value="hybrid">Hybrid</option>
+            </select>
+          </div>
+          <div class="calc-group">
+            <label>Serviciu</label>
+            <select id="calcService" onchange="calcPrice()">
+              <option value="">Selectează...</option>
+              <option value="stage1">Stage 1</option>
+              <option value="stage2">Stage 2</option>
+              <option value="stage3">Stage 3+</option>
+              <option value="dpf">DPF / FAP Delete</option>
+              <option value="egr">EGR Delete</option>
+              <option value="adblue">AdBlue Delete</option>
+              <option value="dtc">DTC Remove</option>
+              <option value="popbang">Pop & Bang</option>
+            </select>
+          </div>
+        </div>
+        <div class="calc-result" id="calcResult">
+          <h4>Estimare Preț</h4>
+          <div class="price" id="calcPrice">—</div>
+          <div class="estimate" id="calcEstimate"></div>
+          <div class="details" id="calcDetails"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process" id="proces">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label reveal">Procesul</div>
+        <h2 class="section-title reveal">Cum Lucrăm</h2>
+        <p class="section-desc reveal">Proces simplu, transparent și profesionist.</p>
+      </div>
+      <div class="process-grid">
+        <div class="process-step reveal">
+          <div class="step-num">01</div>
+          <div class="step-icon">📋</div>
+          <h4>Diagnostic</h4>
+          <p>Verificăm starea motorului, citim erorile și ne asigurăm că totul e OK.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-1">
+          <div class="step-num">02</div>
+          <div class="step-icon">💾</div>
+          <h4>Backup Original</h4>
+          <p>Citim și salvăm fișierul original din ECU. Poți oricând restaura gratuit.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-2">
+          <div class="step-num">03</div>
+          <div class="step-icon">⚡</div>
+          <h4>Tuning</h4>
+          <p>Modificăm hărțile de injecție, turbo și aprindere pentru performanță optimă.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-3">
+          <div class="step-num">04</div>
+          <div class="step-icon">✅</div>
+          <h4>Testare</h4>
+          <p>Testăm pe drum, verificăm toți parametrii și ne asigurăm că totul e perfect.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="why-us" id="why">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label reveal">De Ce Noi</div>
+        <h2 class="section-title reveal">De Ce SorocaTune?</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card reveal">
+          <div class="why-icon">🛡️</div>
+          <div><h4>Garanție pe Lucru</h4><p>Garanție 12 luni pe toate serviciile. Dacă ceva nu e OK, remediem gratuit.</p></div>
+        </div>
+        <div class="why-card reveal reveal-delay-1">
+          <div class="why-icon">💾</div>
+          <div><h4>Backup Original Gratuit</h4><p>Salvăm mereu fișierul original. Revenire gratuită la setările din fabrică.</p></div>
+        </div>
+        <div class="why-card reveal reveal-delay-2">
+          <div class="why-icon">⏱️</div>
+          <div><h4>Rapid și Profesionist</h4><p>Întreaga procedură durează 30-60 minute. Fără complicații.</p></div>
+        </div>
+        <div class="why-card reveal reveal-delay-3">
+          <div class="why-icon">🔧</div>
+          <div><h4>Echipament Profesional</h4><p>Alientech KESS/K-TAG — standard mondial în chip tuning.</p></div>
+        </div>
+        <div class="why-card reveal reveal-delay-4">
+          <div class="why-icon">📱</div>
+          <div><h4>Suport Post-Tuning</h4><p>Rămânem în contact după tuning. Orice întrebare — sună sau scrie.</p></div>
+        </div>
+        <div class="why-card reveal reveal-delay-5">
+          <div class="why-icon">💰</div>
+          <div><h4>Prețuri Corecte</h4><p>Prețuri transparente, fără surprize. Plătești doar ce alegi.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="recenzii">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label reveal">Recenzii</div>
+        <h2 class="section-title reveal">Ce Zic Clienții</h2>
+        <p class="section-desc reveal">Recenzii reale de la clienți mulțumiți.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Am făcut Stage 1 pe BMW 320d și diferența e uriașă. Trage mult mai bine, consumul a scăzut. Profesioniști adevărați!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">A</div>
+            <div><div class="testimonial-name">Andrei M.</div><div class="testimonial-car">BMW 320d 190CP</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-1">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"VW Golf TDI tunat Stage 1. Rezultatul e incredibil — mașina e altceva. Recomand cu încredere, băieții știu ce fac!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">I</div>
+            <div><div class="testimonial-name">Ion C.</div><div class="testimonial-car">VW Golf 2.0 TDI 150CP</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-2">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Am scăpat de problemele cu DPF-ul. Mașina merge perfect acum, nici o eroare. Rapid, profesional, preț corect."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">V</div>
+            <div><div class="testimonial-name">Vasile D.</div><div class="testimonial-car">Renault 1.5 dCi</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="galerie">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label reveal">Galerie</div>
+        <h2 class="section-title reveal">Mașinile Noastre</h2>
+        <p class="section-desc reveal">Câteva proiecte recente. Adaugă poze cu mașini tunate.</p>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item reveal">
+          <div class="gallery-placeholder"><span class="icon">📸</span>Adaugă poză</div>
+        </div>
+        <div class="gallery-item reveal reveal-delay-1">
+          <div class="gallery-placeholder"><span class="icon">📸</span>Adaugă poză</div>
+        </div>
+        <div class="gallery-item reveal reveal-delay-2">
+          <div class="gallery-placeholder"><span class="icon">📸</span>Adaugă poză</div>
+        </div>
+        <div class="gallery-item reveal reveal-delay-3">
+          <div class="gallery-placeholder"><span class="icon">📸</span>Adaugă poză</div>
+        </div>
+        <div class="gallery-item reveal reveal-delay-4">
+          <div class="gallery-placeholder"><span class="icon">📸</span>Adaugă poză</div>
+        </div>
+        <div class="gallery-item reveal reveal-delay-5">
+          <div class="gallery-placeholder"><span class="icon">📸</span>Adaugă poză</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label reveal">Contact</div>
+        <h2 class="section-title reveal">Programează-te Acum</h2>
+        <p class="section-desc reveal">Completează formularul sau contactează-ne direct.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <h3>Date de Contact</h3>
+          <p>Suntem disponibili zilnic pentru programări și consultanță gratuită.</p>
+          <div class="contact-item">
+            <span class="icon">📞</span>
+            <div>
+              <div class="label">Telefon / WhatsApp</div>
+              <div class="value"><a href="tel:+37367515744">067 515 744</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="icon">📧</span>
+            <div>
+              <div class="label">Email</div>
+              <div class="value"><a href="mailto:sorocatune@gmail.com">sorocatune@gmail.com</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="icon">📍</span>
+            <div>
+              <div class="label">Locație</div>
+              <div class="value">Soroca, Republica Moldova</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="icon">🕐</span>
+            <div>
+              <div class="label">Program</div>
+              <div class="value">Luni - Sâmbătă: 09:00 - 18:00</div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form reveal reveal-delay-1">
+          <form id="contactForm" onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Nume</label>
+                <input type="text" placeholder="Numele tău" required>
+              </div>
+              <div class="form-group">
+                <label>Telefon</label>
+                <input type="tel" placeholder="06X XXX XXX" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Mașina</label>
+              <input type="text" placeholder="Ex: BMW 320d 2019 190CP">
+            </div>
+            <div class="form-group">
+              <label>Serviciu dorit</label>
+              <select required>
+                <option value="">Selectează serviciul</option>
+                <option>Stage 1 — Software Only</option>
+                <option>Stage 2 — Software + Hardware</option>
+                <option>Stage 3+ — Full Build</option>
+                <option>DPF / FAP Delete</option>
+                <option>EGR Delete</option>
+                <option>AdBlue Delete</option>
+                <option>Altele</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Mesaj (opțional)</label>
+              <textarea placeholder="Detalii suplimentare..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-submit">🚀 Trimite Programarea</button>
+            <div class="form-toast" id="formToast">✅ Programare trimisă cu succes! Te contactăm în curând.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 <span>SOROCATUNE</span> — Chip Tuning Profesional în Soroca, Moldova</p>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP FLOAT -->
+  <a href="https://wa.me/37367515744" target="_blank" class="wa-float" aria-label="WhatsApp">
+    <svg viewBox="0 0 32 32"><path d="M16.004 0h-.008C7.174 0 0 7.176 0 16c0 3.5 1.132 6.742 3.054 9.378L1.054 31.29l6.166-1.968C9.77 30.932 12.76 32 16.004 32 24.826 32 32 24.822 32 16S24.826 0 16.004 0zm9.31 22.604c-.39 1.1-1.932 2.014-3.168 2.28-.846.18-1.95.322-5.67-1.218-4.762-1.97-7.826-6.81-8.064-7.126-.23-.316-1.932-2.574-1.932-4.908s1.224-3.482 1.658-3.96c.434-.478.948-.598 1.264-.598.316 0 .632.004.908.016.292.014.684-.11 1.07.816.39.948 1.326 3.234 1.442 3.468.116.234.194.508.04.816-.156.316-.234.508-.468.786-.234.278-.492.62-.702.832-.234.234-.478.488-.204.956.272.468 1.214 2.002 2.606 3.244 1.788 1.596 3.296 2.09 3.764 2.324.468.234.742.196 1.014-.118.278-.316 1.186-1.382 1.502-1.858.316-.478.632-.39 1.07-.234.434.156 2.768 1.306 3.242 1.544.468.234.786.352.902.548.118.194.118 1.136-.272 2.238z"/></svg>
+  </a>
+
+  <!-- BACK TO TOP -->
+  <button class="back-top" id="backTop" onclick="window.scrollTo({top:0})">↑</button>
+
+  <script>
+    // ===== NAV SCROLL =====
+    const nav = document.getElementById('nav');
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+      backTop.classList.toggle('show', window.scrollY > 600);
+    });
+
+    // ===== MOBILE MENU =====
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+    function closeMenu() {
+      navToggle.classList.remove('active');
+      navLinks.classList.remove('open');
+    }
+
+    // ===== SCROLL REVEAL =====
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ===== RESULT BAR ANIMATION =====
+    const barObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.result-bar-fill').forEach((bar, i) => {
+            setTimeout(() => bar.classList.add('animated'), i * 150);
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.result-card').forEach(card => barObserver.observe(card));
+
+    // ===== COUNTER ANIMATION =====
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target);
+          let current = 0;
+          const increment = target / 60;
+          const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+              el.textContent = target;
+              clearInterval(timer);
+            } else {
+              el.textContent = Math.floor(current);
+            }
+          }, 25);
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+    // ===== PRICE CALCULATOR =====
+    const pricing = {
+      stage1: { diesel: { price: '150-250€', cp: '+15-40%', torque: '+20-50%', time: '~45 min' }, benzina: { price: '200-350€', cp: '+20-50%', torque: '+25-60%', time: '~45 min' }, hybrid: { price: '200-350€', cp: '+15-35%', torque: '+20-45%', time: '~60 min' } },
+      stage2: { diesel: { price: '250-400€', cp: '+30-50%', torque: '+40-70%', time: '~2-3 ore' }, benzina: { price: '300-500€', cp: '+35-60%', torque: '+40-70%', time: '~2-3 ore' }, hybrid: { price: '300-500€', cp: '+25-45%', torque: '+30-50%', time: '~3-4 ore' } },
+      stage3: { diesel: { price: '500-1000€+', cp: '+50-100%', torque: '+60-120%', time: '1-3 zile' }, benzina: { price: '600-1500€+', cp: '+60-150%', torque: '+70-150%', time: '1-3 zile' }, hybrid: { price: '600-1200€+', cp: '+40-80%', torque: '+50-90%', time: '1-3 zile' } },
+      dpf: { price: '80-150€', label: 'DPF / FAP Delete' },
+      egr: { price: '80-120€', label: 'EGR Delete' },
+      adblue: { price: '100-200€', label: 'AdBlue Delete' },
+      dtc: { price: '50-100€', label: 'DTC Remove' },
+      popbang: { price: '80-150€', label: 'Pop & Bang' }
+    };
+
+    function calcPrice() {
+      const fuel = document.getElementById('calcFuel').value;
+      const service = document.getElementById('calcService').value;
+      const result = document.getElementById('calcResult');
+      const priceEl = document.getElementById('calcPrice');
+      const estimateEl = document.getElementById('calcEstimate');
+      const detailsEl = document.getElementById('calcDetails');
+
+      if (!fuel || !service) { result.classList.remove('show'); return; }
+
+      const data = pricing[service];
+      if (data[fuel]) {
+        const d = data[fuel];
+        priceEl.textContent = d.price;
+        estimateEl.textContent = 'Preț estimativ — poate varia în funcție de mașină';
+        detailsEl.innerHTML = `
+          <div class="detail-item"><div class="val">${d.cp}</div><div class="lbl">Câștig CP</div></div>
+          <div class="detail-item"><div class="val">${d.torque}</div><div class="lbl">Câștig Cuplu</div></div>
+        `;
+      } else if (data.price) {
+        priceEl.textContent = data.price;
+        estimateEl.textContent = data.label;
+        detailsEl.innerHTML = '';
+      }
+      result.classList.add('show');
+    }
+
+    // ===== CONTACT FORM =====
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('.btn-submit');
+      const toast = document.getElementById('formToast');
+      
+      btn.textContent = '⏳ Se trimite...';
+      btn.disabled = true;
+      
+      // Simulate send (replace with actual endpoint)
+      setTimeout(() => {
+        toast.classList.add('show');
+        btn.textContent = '✅ Trimis!';
+        form.reset();
+        setTimeout(() => {
+          btn.textContent = '🚀 Trimite Programarea';
+          btn.disabled = false;
+          toast.classList.remove('show');
+        }, 4000);
+      }, 1500);
+    }
+
+    // ===== SMOOTH SCROLL OFFSET =====
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          const y = target.getBoundingClientRect().top + window.pageYOffset - 80;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

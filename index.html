@@ -1,1642 +1,897 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="SorocaTune — Chip Tuning Profesional în Soroca, Moldova. Stage 1, Stage 2, Stage 3+. Reprogramare ECU cu garanție. +15-60% cai putere.">
-  <meta name="keywords" content="chip tuning, soroca, moldova, stage 1, stage 2, ECU remap, reprogramare, tuning auto, dpf delete, egr delete">
-  <meta name="author" content="SorocaTune">
-  <meta property="og:title" content="SorocaTune — Chip Tuning Profesional Soroca">
-  <meta property="og:description" content="Deblochează potențialul mașinii tale. +15-60% cai putere. Reprogramare ECU profesională cu garanție.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://sorocatune.md">
-  <meta property="og:image" content="og-image.jpg">
-  <meta name="theme-color" content="#0a0a0a">
-  <title>SorocaTune — Chip Tuning Profesional în Soroca, Moldova</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏎️</text></svg>">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    /* ========================================
-       SOROCATUNE — DARK AUTOMOTIVE THEME
-       ======================================== */
-    
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    :root {
-      --bg-primary: #0a0a0a;
-      --bg-secondary: #111111;
-      --bg-card: #161616;
-      --bg-card-hover: #1a1a1a;
-      --border: #222222;
-      --border-hover: #333333;
-      --text-primary: #f5f5f5;
-      --text-secondary: #999999;
-      --text-muted: #666666;
-      --accent: #ff6b00;
-      --accent-hover: #ff8533;
-      --accent-glow: rgba(255, 107, 0, 0.15);
-      --accent-glow-strong: rgba(255, 107, 0, 0.3);
-      --success: #22c55e;
-      --danger: #ef4444;
-      --radius: 12px;
-      --radius-sm: 8px;
-      --radius-lg: 16px;
-      --shadow: 0 4px 24px rgba(0,0,0,0.4);
-      --shadow-lg: 0 8px 40px rgba(0,0,0,0.6);
-      --transition: 200ms ease-out;
-      --transition-slow: 400ms ease-out;
-      --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    
-    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-    
-    body {
-      font-family: var(--font);
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: var(--bg-primary); }
-    ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-    
-    /* ===== ANIMATIONS ===== */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-delay-1 { transition-delay: 80ms; }
-    .reveal-delay-2 { transition-delay: 160ms; }
-    .reveal-delay-3 { transition-delay: 240ms; }
-    .reveal-delay-4 { transition-delay: 320ms; }
-    .reveal-delay-5 { transition-delay: 400ms; }
-    
-    @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 20px var(--accent-glow); }
-      50% { box-shadow: 0 0 40px var(--accent-glow-strong); }
-    }
-    
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-    
-    @keyframes gradient-shift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    
-    @keyframes count-up {
-      from { opacity: 0; transform: scale(0.5); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    
-    @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1; transform: none; transition: none; }
-      .reveal-delay-1, .reveal-delay-2, .reveal-delay-3, .reveal-delay-4, .reveal-delay-5 { transition-delay: 0; }
-      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-    }
-    
-    /* ===== CONTAINER ===== */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-    
-    /* ===== NAV ===== */
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: rgba(10, 10, 10, 0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid transparent;
-      transition: border-color var(--transition), background var(--transition);
-    }
-    .nav.scrolled {
-      border-bottom-color: var(--border);
-      background: rgba(10, 10, 10, 0.95);
-    }
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 72px;
-    }
-    .nav-logo {
-      font-size: 1.3rem;
-      font-weight: 900;
-      color: var(--text-primary);
-      text-decoration: none;
-      letter-spacing: -0.5px;
-      transition: color var(--transition);
-    }
-    .nav-logo span { color: var(--accent); }
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
-    .nav-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color var(--transition);
-      position: relative;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--accent);
-      transition: width var(--transition);
-    }
-    .nav-links a:hover { color: var(--text-primary); }
-    .nav-links a:hover::after { width: 100%; }
-    
-    /* Mobile menu */
-    .nav-toggle {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 8px;
-    }
-    .nav-toggle span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text-primary);
-      margin: 5px 0;
-      transition: transform var(--transition), opacity var(--transition);
-    }
-    .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-    .nav-toggle.active span:nth-child(2) { opacity: 0; }
-    .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-    
-    @media (max-width: 768px) {
-      .nav-toggle { display: block; }
-      .nav-links {
-        position: fixed;
-        top: 72px;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(10, 10, 10, 0.98);
-        backdrop-filter: blur(20px);
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 40px;
-        transform: translateX(100%);
-        transition: transform 0.4s var(--ease-out);
-      }
-      .nav-links.open { transform: translateX(0); }
-      .nav-links a { font-size: 1.2rem; }
-    }
-    
-    /* ===== HERO ===== */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      padding: 120px 24px 80px;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: 
-        radial-gradient(ellipse 80% 50% at 50% -20%, var(--accent-glow-strong), transparent),
-        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(255, 107, 0, 0.05), transparent),
-        radial-gradient(ellipse 60% 40% at 20% 80%, rgba(255, 60, 0, 0.05), transparent);
-      z-index: 0;
-    }
-    .hero-grid {
-      position: absolute;
-      inset: 0;
-      background-image: 
-        linear-gradient(rgba(255,107,0,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,107,0,0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-      z-index: 0;
-      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent);
-    }
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 800px;
-    }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      background: var(--accent-glow);
-      border: 1px solid rgba(255, 107, 0, 0.2);
-      border-radius: 100px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--accent);
-      margin-bottom: 24px;
-    }
-    .hero h1 {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -2px;
-      margin-bottom: 24px;
-    }
-    .hero h1 .highlight {
-      background: linear-gradient(135deg, var(--accent), #ff3300);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero p {
-      font-size: 1.15rem;
-      color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto 40px;
-      line-height: 1.7;
-    }
-    .hero-buttons {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    
-    /* ===== BUTTONS ===== */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 28px;
-      border-radius: var(--radius-sm);
-      font-size: 0.95rem;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
-    }
-    .btn:active { transform: scale(0.97); }
-    
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-      box-shadow: 0 0 20px var(--accent-glow);
-    }
-    .btn-primary:hover {
-      background: var(--accent-hover);
-      box-shadow: 0 0 30px var(--accent-glow-strong);
-    }
-    
-    .btn-secondary {
-      background: transparent;
-      color: var(--text-primary);
-      border: 1px solid var(--border);
-    }
-    .btn-secondary:hover {
-      border-color: var(--text-muted);
-      background: rgba(255,255,255,0.03);
-    }
-    
-    /* ===== STATS ===== */
-    .stats {
-      padding: 60px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: var(--bg-secondary);
-    }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-      text-align: center;
-    }
-    .stat-item { padding: 20px; }
-    .stat-number {
-      font-size: 2.8rem;
-      font-weight: 900;
-      color: var(--accent);
-      letter-spacing: -1px;
-    }
-    .stat-number .counter { display: inline; }
-    .stat-label {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      margin-top: 4px;
-    }
-    
-    @media (max-width: 768px) {
-      .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
-      .stat-number { font-size: 2rem; }
-    }
-    
-    /* ===== SECTIONS ===== */
-    section {
-      padding: 100px 0;
-    }
-    .section-header {
-      text-align: center;
-      margin-bottom: 64px;
-    }
-    .section-label {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-    .section-title {
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      font-weight: 800;
-      letter-spacing: -1px;
-      margin-bottom: 16px;
-    }
-    .section-desc {
-      color: var(--text-secondary);
-      max-width: 500px;
-      margin: 0 auto;
-      font-size: 1rem;
-    }
-    
-    /* ===== SERVICES ===== */
-    .services { background: var(--bg-primary); }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-    .service-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px;
-      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent), transparent);
-      opacity: 0;
-      transition: opacity var(--transition);
-    }
-    .service-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-4px);
-      box-shadow: var(--shadow);
-    }
-    .service-card:hover::before { opacity: 1; }
-    .service-icon {
-      font-size: 2rem;
-      margin-bottom: 16px;
-    }
-    .service-card h3 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-    .service-card p {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      margin-bottom: 16px;
-    }
-    .service-card ul {
-      list-style: none;
-      margin-bottom: 20px;
-    }
-    .service-card ul li {
-      padding: 6px 0;
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .service-card ul li::before {
-      content: '✓';
-      color: var(--accent);
-      font-weight: 700;
-      font-size: 0.8rem;
-    }
-    .service-price {
-      font-size: 0.9rem;
-      color: var(--accent);
-      font-weight: 600;
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
-    }
-    .service-card.popular {
-      border-color: var(--accent);
-      background: linear-gradient(180deg, rgba(255,107,0,0.05), var(--bg-card));
-    }
-    .popular-badge {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      background: var(--accent);
-      color: #fff;
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 100px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    
-    /* ===== RESULTS ===== */
-    .results { background: var(--bg-secondary); }
-    .results-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-    .result-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px;
-      transition: border-color var(--transition), transform var(--transition);
-    }
-    .result-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-2px);
-    }
-    .result-car {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-    .result-car-icon {
-      font-size: 1.8rem;
-    }
-    .result-car-name {
-      font-weight: 600;
-      font-size: 1rem;
-    }
-    .result-bars { display: flex; flex-direction: column; gap: 16px; }
-    .result-bar-group {}
-    .result-bar-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      margin-bottom: 6px;
-    }
-    .result-bar-label strong { color: var(--accent); }
-    .result-bar {
-      height: 6px;
-      background: var(--border);
-      border-radius: 3px;
-      overflow: hidden;
-      position: relative;
-    }
-    .result-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent), #ff3300);
-      border-radius: 3px;
-      width: 0;
-      transition: width 1.2s var(--ease-out);
-    }
-    .result-bar-fill.animated { width: var(--fill); }
-    .result-gain {
-      text-align: center;
-      margin-top: 16px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
-    }
-    .result-gain span {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: var(--accent);
-    }
-    .result-gain small {
-      display: block;
-      color: var(--text-muted);
-      font-size: 0.75rem;
-    }
-    
-    /* ===== CALCULATOR ===== */
-    .calculator { background: var(--bg-primary); }
-    .calc-box {
-      max-width: 600px;
-      margin: 0 auto;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 40px;
-    }
-    .calc-group {
-      margin-bottom: 24px;
-    }
-    .calc-group label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: var(--text-secondary);
-    }
-    .calc-group select, .calc-group input {
-      width: 100%;
-      padding: 12px 16px;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: var(--text-primary);
-      font-size: 0.95rem;
-      font-family: var(--font);
-      transition: border-color var(--transition);
-      appearance: none;
-    }
-    .calc-group select {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23999' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 16px center;
-      padding-right: 40px;
-    }
-    .calc-group select:focus, .calc-group input:focus {
-      outline: none;
-      border-color: var(--accent);
-    }
-    .calc-result {
-      background: var(--accent-glow);
-      border: 1px solid rgba(255, 107, 0, 0.2);
-      border-radius: var(--radius);
-      padding: 24px;
-      text-align: center;
-      margin-top: 24px;
-      opacity: 0;
-      transform: scale(0.95);
-      transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
-    }
-    .calc-result.show {
-      opacity: 1;
-      transform: scale(1);
-    }
-    .calc-result h4 {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-bottom: 8px;
-    }
-    .calc-result .price {
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--accent);
-    }
-    .calc-result .estimate {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-top: 8px;
-    }
-    .calc-result .details {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid rgba(255, 107, 0, 0.15);
-    }
-    .calc-result .detail-item {
-      text-align: center;
-    }
-    .calc-result .detail-item .val {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-    .calc-result .detail-item .lbl {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-    
-    /* ===== PROCESS ===== */
-    .process { background: var(--bg-secondary); }
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 24px;
-    }
-    .process-step {
-      text-align: center;
-      padding: 32px 24px;
-      position: relative;
-    }
-    .process-step .step-num {
-      font-size: 4rem;
-      font-weight: 900;
-      color: rgba(255, 107, 0, 0.08);
-      line-height: 1;
-      margin-bottom: 16px;
-    }
-    .process-step .step-icon {
-      font-size: 2rem;
-      margin-bottom: 16px;
-    }
-    .process-step h4 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .process-step p {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-    }
-    
-    /* ===== WHY US ===== */
-    .why-us { background: var(--bg-primary); }
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-    }
-    .why-card {
-      display: flex;
-      gap: 16px;
-      padding: 24px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      transition: border-color var(--transition);
-    }
-    .why-card:hover { border-color: var(--border-hover); }
-    .why-card .why-icon {
-      font-size: 1.8rem;
-      flex-shrink: 0;
-    }
-    .why-card h4 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-    .why-card p {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-    }
-    
-    /* ===== TESTIMONIALS ===== */
-    .testimonials { background: var(--bg-secondary); }
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-    }
-    .testimonial-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px;
-    }
-    .testimonial-stars {
-      color: #fbbf24;
-      font-size: 0.9rem;
-      margin-bottom: 12px;
-    }
-    .testimonial-text {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      font-style: italic;
-      margin-bottom: 16px;
-      line-height: 1.6;
-    }
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .testimonial-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--accent-glow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 0.9rem;
-      color: var(--accent);
-    }
-    .testimonial-name {
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-    .testimonial-car {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-    
-    /* ===== GALLERY ===== */
-    .gallery { background: var(--bg-primary); }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 16px;
-    }
-    .gallery-item {
-      aspect-ratio: 4/3;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      position: relative;
-      cursor: pointer;
-      transition: transform var(--transition), border-color var(--transition);
-    }
-    .gallery-item:hover {
-      transform: scale(1.02);
-      border-color: var(--border-hover);
-    }
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .gallery-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 8px;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-    }
-    .gallery-placeholder .icon { font-size: 2rem; }
-    
-    /* ===== CONTACT ===== */
-    .contact { background: var(--bg-secondary); }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-    }
-    @media (max-width: 768px) {
-      .contact-grid { grid-template-columns: 1fr; }
-    }
-    .contact-info h3 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .contact-info > p {
-      color: var(--text-secondary);
-      margin-bottom: 32px;
-      font-size: 0.95rem;
-    }
-    .contact-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-    .contact-item .icon {
-      font-size: 1.4rem;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .contact-item .label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 2px;
-    }
-    .contact-item .value {
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-    .contact-item .value a {
-      color: var(--text-primary);
-      text-decoration: none;
-      transition: color var(--transition);
-    }
-    .contact-item .value a:hover { color: var(--accent); }
-    
-    .contact-form {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 32px;
-    }
-    .form-group {
-      margin-bottom: 16px;
-    }
-    .form-group label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 500;
-      margin-bottom: 6px;
-      color: var(--text-secondary);
-    }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      padding: 12px 16px;
-      background: var(--bg-primary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: var(--text-primary);
-      font-size: 0.95rem;
-      font-family: var(--font);
-      transition: border-color var(--transition);
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--accent);
-    }
-    .form-group textarea { resize: vertical; min-height: 100px; }
-    .form-group select {
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23999' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 16px center;
-      padding-right: 40px;
-    }
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    @media (max-width: 480px) {
-      .form-row { grid-template-columns: 1fr; }
-    }
-    .btn-submit {
-      width: 100%;
-      margin-top: 8px;
-    }
-    .form-toast {
-      display: none;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 16px;
-      background: rgba(34, 197, 94, 0.1);
-      border: 1px solid rgba(34, 197, 94, 0.2);
-      border-radius: var(--radius-sm);
-      color: var(--success);
-      font-size: 0.9rem;
-      font-weight: 500;
-      margin-top: 16px;
-    }
-    .form-toast.show { display: flex; }
-    
-    /* ===== FOOTER ===== */
-    .footer {
-      padding: 40px 0;
-      border-top: 1px solid var(--border);
-      text-align: center;
-    }
-    .footer p {
-      color: var(--text-muted);
-      font-size: 0.85rem;
-    }
-    .footer p span { color: var(--accent); font-weight: 600; }
-    
-    /* ===== WHATSAPP FLOAT ===== */
-    .wa-float {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 999;
-      width: 56px;
-      height: 56px;
-      background: #25d366;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-      transition: transform var(--transition), box-shadow var(--transition);
-      animation: pulse-glow 3s infinite;
-    }
-    .wa-float:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 30px rgba(37, 211, 102, 0.5);
-    }
-    .wa-float:active { transform: scale(0.95); }
-    .wa-float svg { width: 28px; height: 28px; fill: #fff; }
-    
-    /* ===== BACK TO TOP ===== */
-    .back-top {
-      position: fixed;
-      bottom: 90px;
-      right: 28px;
-      z-index: 998;
-      width: 40px;
-      height: 40px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity var(--transition), transform var(--transition), background var(--transition);
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-    }
-    .back-top.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .back-top:hover {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-    }
-    .back-top:active { transform: scale(0.9); }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SOROCA TUNE — Chip Tuning Profesional în Soroca</title>
+<meta name="description" content="Servicii profesionale de chip tuning în Soroca. Stage 1, Stage 2, Stage 3+. Crește puterea mașinii tale cu până la 30%. Garanție inclusă.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff6b00'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='14' fill='white'%3EST%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --accent:#ff6b00;
+  --accent-light:#ff8c33;
+  --accent-glow:rgba(255,107,0,.12);
+  --bg:#0a0a0f;
+  --bg-card:#12121a;
+  --bg-card-hover:#1a1a25;
+  --text:#e8e8ed;
+  --text-muted:#8888a0;
+  --border:rgba(255,255,255,.06);
+  --radius:12px;
+  --radius-sm:8px;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{cursor:pointer;font-family:inherit;border:none;background:none;color:inherit}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* ─── NAV ─── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 0;transition:background .3s,box-shadow .3s,padding .3s}
+.nav.scrolled{background:rgba(10,10,15,.92);backdrop-filter:blur(16px);box-shadow:0 1px 0 var(--border);padding:10px 0}
+.nav .container{display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:12px;font-size:1.25rem;font-weight:800;letter-spacing:1px}
+.logo-st{background:var(--accent);color:#fff;font-weight:900;padding:4px 10px;border-radius:6px;font-size:.95rem}
+.logo-white{color:#fff}
+.logo-accent{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{font-size:.875rem;font-weight:500;color:var(--text-muted);transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{background:var(--accent)!important;color:#fff!important;padding:10px 22px;border-radius:var(--radius-sm);font-weight:600;font-size:.875rem;transition:background .2s,transform .15s}
+.nav-cta:hover{background:var(--accent-light)!important;transform:translateY(-1px)}
+.mobile-toggle{display:none;flex-direction:column;gap:5px;padding:4px}
+.mobile-toggle span{display:block;width:24px;height:2px;background:var(--text);border-radius:2px;transition:transform .3s,opacity .3s}
+.mobile-toggle.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.mobile-toggle.open span:nth-child(2){opacity:0}
+.mobile-toggle.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* ─── HERO ─── */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-40%;right:-20%;width:800px;height:800px;background:radial-gradient(circle,rgba(255,107,0,.08) 0%,transparent 70%);pointer-events:none}
+.hero .container{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--accent-glow);border:1px solid rgba(255,107,0,.2);padding:8px 16px;border-radius:100px;font-size:.8rem;font-weight:600;color:var(--accent);margin-bottom:20px;animation:fadeInUp .6s ease-out}
+.hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:900;line-height:1.1;margin-bottom:20px;letter-spacing:-.5px;animation:fadeInUp .6s ease-out .1s both}
+.hero h1 span{color:var(--accent)}
+.hero p{font-size:1.1rem;color:var(--text-muted);max-width:520px;margin-bottom:36px;animation:fadeInUp .6s ease-out .2s both}
+.hero-buttons{display:flex;gap:16px;flex-wrap:wrap;animation:fadeInUp .6s ease-out .3s both}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:var(--radius-sm);font-weight:600;font-size:.95rem;transition:all .2s}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent-light);transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,107,0,.3)}
+.btn-outline{border:1.5px solid rgba(255,107,0,.3);color:var(--accent)}
+.btn-outline:hover{border-color:var(--accent);background:var(--accent-glow);transform:translateY(-2px)}
+.hero-visual{display:flex;justify-content:center;align-items:center;animation:fadeInUp .8s ease-out .4s both}
+.hero-car-display{position:relative;width:100%;max-width:480px;aspect-ratio:1;background:radial-gradient(circle at center,var(--accent-glow),transparent 70%);display:flex;align-items:center;justify-content:center}
+.hero-car-display svg{width:280px;height:280px;opacity:.7;color:var(--accent)}
+
+/* ─── STATS ─── */
+.stats{padding:40px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stats .container{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.stat-item{text-align:center}
+.stat-number{font-size:clamp(2rem,4vw,3rem);font-weight:900;color:var(--accent)}
+.stat-label{font-size:.9rem;color:var(--text-muted);margin-top:4px}
+
+/* ─── SECTION ─── */
+.section{padding:100px 0}
+.section-title{text-align:center;margin-bottom:60px}
+.section-title h2{font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:800;margin-bottom:12px}
+.section-title p{color:var(--text-muted);max-width:600px;margin:0 auto}
+.section-title .label{display:inline-flex;align-items:center;gap:6px;background:var(--accent-glow);color:var(--accent);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:6px 14px;border-radius:100px;margin-bottom:16px}
+
+/* ─── SERVICES ─── */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.service-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:32px 28px;transition:all .3s;position:relative;overflow:hidden}
+.service-card:hover{border-color:rgba(255,107,0,.25);transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.4)}
+.service-card .icon-wrap{width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:var(--accent-glow);border-radius:10px;margin-bottom:20px}
+.service-card .icon-wrap svg{width:24px;height:24px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.service-card h3{font-size:1.15rem;font-weight:700;margin-bottom:8px}
+.service-card p{font-size:.9rem;color:var(--text-muted);line-height:1.7}
+.popular-badge{position:absolute;top:16px;right:16px;background:var(--accent);color:#fff;font-size:.7rem;font-weight:700;padding:4px 10px;border-radius:100px;text-transform:uppercase;letter-spacing:.5px}
+
+/* ─── RESULTS ─── */
+.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.result-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:all .3s}
+.result-card:hover{border-color:rgba(255,107,0,.2)}
+.result-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.result-header .car-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:var(--accent-glow);border-radius:8px}
+.result-header .car-icon svg{width:20px;height:20px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.result-header h3{font-size:1rem;font-weight:700}
+.result-header span{font-size:.8rem;color:var(--text-muted)}
+.bar-group{margin-bottom:14px}
+.bar-label{display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:6px}
+.bar-label span:first-child{color:var(--text-muted)}
+.bar-label span:last-child{font-weight:600;color:var(--accent)}
+.bar-track{height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px;width:0;transition:width 1.2s ease-out}
+.bar-fill.stock{background:var(--text-muted)}
+.bar-fill.tuned{background:linear-gradient(90deg,var(--accent),var(--accent-light))}
+.result-gains{display:flex;gap:16px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.gain{text-align:center;flex:1}
+.gain .val{font-size:1.1rem;font-weight:800;color:var(--accent)}
+.gain .lbl{font-size:.7rem;color:var(--text-muted);margin-top:2px}
+
+/* ─── CALCULATOR ─── */
+.calc-wrap{max-width:700px;margin:0 auto;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:40px}
+.calc-row{margin-bottom:20px}
+.calc-row label{display:block;font-size:.85rem;font-weight:600;margin-bottom:8px}
+.calc-row select{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:.95rem;font-family:inherit;appearance:none;cursor:pointer;transition:border-color .2s}
+.calc-row select:focus{outline:none;border-color:var(--accent)}
+.calc-price{text-align:center;padding:28px;background:var(--accent-glow);border-radius:var(--radius-sm);margin-top:28px}
+.calc-price .amount{font-size:2.5rem;font-weight:900;color:var(--accent)}
+.calc-price .details{font-size:.85rem;color:var(--text-muted);margin-top:6px}
+
+/* ─── PROCESS ─── */
+.process-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;position:relative}
+.process-step{text-align:center;padding:32px 20px}
+.process-step .step-num{font-size:.75rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.process-step .icon-wrap{width:56px;height:56px;display:flex;align-items:center;justify-content:center;background:var(--accent-glow);border-radius:14px;margin:0 auto 16px}
+.process-step .icon-wrap svg{width:26px;height:26px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.process-step h3{font-size:1rem;font-weight:700;margin-bottom:8px}
+.process-step p{font-size:.85rem;color:var(--text-muted)}
+
+/* ─── WHY US ─── */
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+.why-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;text-align:center;transition:all .3s}
+.why-card:hover{border-color:rgba(255,107,0,.2);transform:translateY(-3px)}
+.why-card .icon-wrap{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--accent-glow);border-radius:10px;margin:0 auto 16px}
+.why-card .icon-wrap svg{width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.why-card h3{font-size:.95rem;font-weight:700;margin-bottom:6px}
+.why-card p{font-size:.82rem;color:var(--text-muted)}
+
+/* ─── TESTIMONIALS ─── */
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.review-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:32px}
+.review-stars{display:flex;gap:3px;margin-bottom:16px}
+.review-stars svg{width:18px;height:18px;fill:#fbbf24;stroke:none}
+.review-text{font-size:.92rem;font-style:italic;color:var(--text-muted);line-height:1.7;margin-bottom:20px}
+.review-author{display:flex;align-items:center;gap:12px}
+.review-avatar{width:40px;height:40px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:#fff}
+.review-name{font-weight:600;font-size:.9rem}
+.review-car{font-size:.78rem;color:var(--text-muted)}
+
+/* ─── GALLERY ─── */
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.gallery-item{aspect-ratio:4/3;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;transition:all .3s;cursor:pointer}
+.gallery-item:hover{border-color:rgba(255,107,0,.25);transform:scale(1.02)}
+.gallery-item svg{width:32px;height:32px;stroke:var(--text-muted);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;opacity:.5}
+.gallery-item span{font-size:.75rem;color:var(--text-muted);opacity:.5}
+
+/* ─── CONTACT ─── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.contact-info-list{display:flex;flex-direction:column;gap:20px}
+.contact-item{display:flex;align-items:flex-start;gap:14px}
+.contact-item .icon-wrap{width:40px;height:40px;min-width:40px;display:flex;align-items:center;justify-content:center;background:var(--accent-glow);border-radius:10px}
+.contact-item .icon-wrap svg{width:20px;height:20px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.contact-item strong{display:block;font-size:.9rem;margin-bottom:2px}
+.contact-item span{font-size:.85rem;color:var(--text-muted)}
+.contact-form{display:flex;flex-direction:column;gap:16px}
+.contact-form input,.contact-form textarea,.contact-form select{width:100%;padding:14px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:.92rem;font-family:inherit;transition:border-color .2s}
+.contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus{outline:none;border-color:var(--accent)}
+.contact-form textarea{resize:vertical;min-height:120px}
+.contact-form button{align-self:flex-start}
+
+/* ─── FOOTER ─── */
+.footer{padding:32px 0;border-top:1px solid var(--border);text-align:center;font-size:.82rem;color:var(--text-muted)}
+
+/* ─── WHATSAPP FLOAT ─── */
+.whatsapp-float{position:fixed;bottom:28px;right:28px;z-index:999;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .2s;background:#25d366}
+.whatsapp-float:hover{transform:scale(1.1)}
+.whatsapp-float svg{width:28px;height:28px}
+
+/* ─── BACK TO TOP ─── */
+.back-top{position:fixed;bottom:28px;right:96px;z-index:999;width:44px;height:44px;border-radius:50%;background:var(--bg-card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none}
+.back-top.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+.back-top:hover{border-color:var(--accent);background:var(--accent-glow)}
+.back-top svg{width:20px;height:20px;stroke:var(--text-muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.back-top:hover svg{stroke:var(--accent)}
+
+/* ─── REVEAL ANIMATION ─── */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .6s ease-out,transform .6s ease-out}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ─── KEYFRAMES ─── */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* ─── MOBILE ─── */
+@media(max-width:768px){
+  .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,15,.98);backdrop-filter:blur(16px);flex-direction:column;align-items:center;justify-content:center;gap:32px}
+  .nav-links.open{display:flex}
+  .mobile-toggle{display:flex}
+  .hero .container{grid-template-columns:1fr;text-align:center}
+  .hero p{margin:0 auto 36px}
+  .hero-buttons{justify-content:center}
+  .hero-visual{display:none}
+  .stats .container{grid-template-columns:1fr;gap:20px}
+  .contact-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .back-top{right:20px;bottom:90px}
+  .whatsapp-float{bottom:20px;right:20px}
+}
+</style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav class="nav" id="nav">
-    <div class="container nav-inner">
-      <a href="#" class="nav-logo">SOROCA<span>TUNE</span></a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#servicii" onclick="closeMenu()">Servicii</a></li>
-        <li><a href="#rezultate" onclick="closeMenu()">Rezultate</a></li>
-        <li><a href="#calculator" onclick="closeMenu()">Calculator</a></li>
-        <li><a href="#proces" onclick="closeMenu()">Cum lucrăm</a></li>
-        <li><a href="#recenzii" onclick="closeMenu()">Recenzii</a></li>
-        <li><a href="#contact" onclick="closeMenu()">Programează-te</a></li>
-      </ul>
-      <button class="nav-toggle" id="navToggle" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
+<!-- ═══════════ NAVIGATION ═══════════ -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <a href="#" class="logo">
+      <span class="logo-st">ST</span>
+      <span><span class="logo-white">SOROCA</span><span class="logo-accent">TUNE</span></span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#servicii">Servicii</a></li>
+      <li><a href="#rezultate">Rezultate</a></li>
+      <li><a href="#calculator">Calculator</a></li>
+      <li><a href="#cum-lucram">Cum lucrăm</a></li>
+      <li><a href="#recenzii">Recenzii</a></li>
+      <li><a href="#contact" class="nav-cta">Programează-te</a></li>
+    </ul>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Meniu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
 
-  <!-- HERO -->
-  <section class="hero" id="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-grid"></div>
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="container">
     <div class="hero-content">
-      <div class="hero-badge">🏎️ Chip Tuning Profesional</div>
-      <h1>
-        <span class="highlight">Deblochează</span><br>
-        Potențialul Mașinii Tale
-      </h1>
-      <p>Mai mulți cai. Cuplu mai mare. Consum redus. Reprogramare ECU profesională cu garanție. Rezultate simțite de la prima apăsare a pedalei.</p>
+      <div class="hero-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+        Chip Tuning Profesional
+      </div>
+      <h1>Deblochează <span>Potențialul</span> Mașinii Tale</h1>
+      <p>Servicii profesionale de chip tuning și optimizare ECU în Soroca. Crește puterea, reduce consumul și simte diferența de la prima accelerație.</p>
       <div class="hero-buttons">
-        <a href="#contact" class="btn btn-primary">🔧 Programează Acum</a>
-        <a href="#servicii" class="btn btn-secondary">Vezi Serviciile</a>
+        <a href="#contact" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          Programează-te
+        </a>
+        <a href="#servicii" class="btn btn-outline">
+          Vezi Serviciile
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
       </div>
     </div>
-  </section>
-
-  <!-- STATS -->
-  <div class="stats">
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stat-item reveal">
-          <div class="stat-number"><span class="counter" data-target="100">0</span>+</div>
-          <div class="stat-label">Mașini Tunate</div>
-        </div>
-        <div class="stat-item reveal reveal-delay-1">
-          <div class="stat-number"><span class="counter" data-target="30">0</span>%</div>
-          <div class="stat-label">Câștig Mediu CP</div>
-        </div>
-        <div class="stat-item reveal reveal-delay-2">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Garanție</div>
-        </div>
+    <div class="hero-visual">
+      <div class="hero-car-display">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/>
+          <circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>
+        </svg>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- SERVICES -->
-  <section class="services" id="servicii">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label reveal">Servicii</div>
-        <h2 class="section-title reveal">Pachete de Tuning</h2>
-        <p class="section-desc reveal">Alege pachetul potrivit pentru mașina ta. Toate serviciile includ backup original și garanție.</p>
+<!-- ═══════════ STATS ═══════════ -->
+<section class="stats">
+  <div class="container">
+    <div class="stat-item">
+      <div class="stat-number" data-target="100">0</div>
+      <div class="stat-label">Mașini Tunate</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="30">0</div>
+      <div class="stat-label">Câștig Mediu CP</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="100">0</div>
+      <div class="stat-label">Garanție</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SERVICES ═══════════ -->
+<section class="section" id="servicii">
+  <div class="container">
+    <div class="section-title reveal">
+      <div class="label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        Servicii
       </div>
-      <div class="services-grid">
-        <!-- Stage 1 -->
-        <div class="service-card reveal">
-          <div class="service-icon">⚡</div>
-          <h3>Stage 1</h3>
-          <p>Reprogramare software pură. Fără modificări hardware. Rezultate imediate.</p>
-          <ul>
-            <li>+15-40% cai putere</li>
-            <li>+20-50% cuplu</li>
-            <li>Consum redus până la -1L/100km</li>
-            <li>Răspuns accelerator îmbunătățit</li>
-            <li>Garanție 12 luni</li>
-          </ul>
-          <div class="service-price">de la 150€ / sesiune</div>
+      <h2>Servicii de Tuning Profesionale</h2>
+      <p>De la optimizări software simple la modificări hardware complexe — avem soluția potrivită pentru mașina ta.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
         </div>
-        <!-- Stage 2 -->
-        <div class="service-card popular reveal reveal-delay-1">
-          <div class="popular-badge">Popular</div>
-          <div class="service-icon">🔥</div>
-          <h3>Stage 2</h3>
-          <p>Software + modificări hardware minore. Performanță maximă.</p>
-          <ul>
-            <li>Tot ce include Stage 1</li>
-            <li>Downpipe sport / decat</li>
-            <li>Intake performant</li>
-            <li>+30-60% cai putere</li>
-            <li>Garanție 12 luni</li>
-          </ul>
-          <div class="service-price">de la 250€ / sesiune</div>
+        <h3>Stage 1 — Software</h3>
+        <p>Optimizare software pură, fără modificări hardware. Creștere putere 20-35%, reducere consum 5-15%. Remixul ECU-ului original cu parametri optimizați.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <span class="popular-badge">Popular</span>
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
         </div>
-        <!-- Stage 3+ -->
-        <div class="service-card reveal reveal-delay-2">
-          <div class="service-icon">🏆</div>
-          <h3>Stage 3+</h3>
-          <p>Tuning complet cu componente upgradate. Maxim de performanță.</p>
-          <ul>
-            <li>Turbo upgradat</li>
-            <li>Injectoare mai mari</li>
-            <li>Intercooler performant</li>
-            <li>Software custom complet</li>
-            <li>Setup personalizat</li>
-          </ul>
-          <div class="service-price">Preț la discutare</div>
+        <h3>Stage 2 — Hardware + Software</h3>
+        <p>Combină optimizarea software cu componente hardware upgrade: filtru sport, evacuare, intercooler. Creștere putere 30-50% în funcție de motor.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
         </div>
-        <!-- Extra -->
-        <div class="service-card reveal reveal-delay-3">
-          <div class="service-icon">🛠️</div>
-          <h3>Servicii Extra</h3>
-          <p>Soluții specifice pentru optimizarea mașinii tale.</p>
-          <ul>
-            <li>DPF / FAP Delete</li>
-            <li>EGR Delete</li>
-            <li>DTC Remove (erori)</li>
-            <li>AdBlue Delete</li>
-            <li>Speed Limiter Remove</li>
-            <li>Pop & Bang (crackle)</li>
-          </ul>
-          <div class="service-price">de la 80€ / serviciu</div>
+        <h3>Stage 3+ — Racing</h3>
+        <p>Pachet complet pentru performanță maximă: turbo upgrade, injectoare, fuel pump, kit competiție. Proiecte custom cu teste pe banc de putere.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
         </div>
+        <h3>Servicii Extra</h3>
+        <p>DPF/EGR/AdBlue delete, DTC removal, VMAX off, popcorn limiter, launch control, hardcut limiter, deCAT, start-stop deactivate și alte servicii specializate.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ RESULTS ═══════════ -->
+<section class="section" id="rezultate" style="background:rgba(255,255,255,.01)">
+  <div class="container">
+    <div class="section-title reveal">
+      <div class="label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        Rezultate
+      </div>
+      <h2>Rezultate Reale, Măsurate</h2>
+      <p>Fiecare tuning este testat și verificat. Iată câteva exemple de creșteri obținute.</p>
+    </div>
+    <div class="results-grid">
+
+      <div class="result-card reveal">
+        <div class="result-header">
+          <div class="car-icon">
+            <svg viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+          </div>
+          <div>
+            <h3>Renault 1.5 dCi</h3>
+            <span>110 CP Stock</span>
+          </div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-label"><span>CP Stock</span><span>110 CP</span></div>
+          <div class="bar-track"><div class="bar-fill stock" data-width="55"></div></div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-label"><span>CP Tuned</span><span>140 CP</span></div>
+          <div class="bar-track"><div class="bar-fill tuned" data-width="70"></div></div>
+        </div>
+        <div class="result-gains">
+          <div class="gain"><div class="val">+30 CP</div><div class="lbl">Putere</div></div>
+          <div class="gain"><div class="val">+50 Nm</div><div class="lbl">Cuplu</div></div>
+          <div class="gain"><div class="val">-1L</div><div class="lbl">Consum</div></div>
+        </div>
+      </div>
+
+      <div class="result-card reveal">
+        <div class="result-header">
+          <div class="car-icon">
+            <svg viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+          </div>
+          <div>
+            <h3>VW 2.0 TDI</h3>
+            <span>150 CP Stock</span>
+          </div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-label"><span>CP Stock</span><span>150 CP</span></div>
+          <div class="bar-track"><div class="bar-fill stock" data-width="60"></div></div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-label"><span>CP Tuned</span><span>195 CP</span></div>
+          <div class="bar-track"><div class="bar-fill tuned" data-width="78"></div></div>
+        </div>
+        <div class="result-gains">
+          <div class="gain"><div class="val">+45 CP</div><div class="lbl">Putere</div></div>
+          <div class="gain"><div class="val">+70 Nm</div><div class="lbl">Cuplu</div></div>
+          <div class="gain"><div class="val">-0.8L</div><div class="lbl">Consum</div></div>
+        </div>
+      </div>
+
+      <div class="result-card reveal">
+        <div class="result-header">
+          <div class="car-icon">
+            <svg viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+          </div>
+          <div>
+            <h3>BMW 320d</h3>
+            <span>190 CP Stock</span>
+          </div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-label"><span>CP Stock</span><span>190 CP</span></div>
+          <div class="bar-track"><div class="bar-fill stock" data-width="63"></div></div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-label"><span>CP Tuned</span><span>245 CP</span></div>
+          <div class="bar-track"><div class="bar-fill tuned" data-width="82"></div></div>
+        </div>
+        <div class="result-gains">
+          <div class="gain"><div class="val">+55 CP</div><div class="lbl">Putere</div></div>
+          <div class="gain"><div class="val">+80 Nm</div><div class="lbl">Cuplu</div></div>
+          <div class="gain"><div class="val">-0.7L</div><div class="lbl">Consum</div></div>
+        </div>
+      </div>
+
+      <div class="result-card reveal">
+        <div class="result-header">
+          <div class="car-icon">
+            <svg viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+          </div>
+          <div>
+            <h3>Audi 2.0 TFSI</h3>
+            <span>230 CP Stock</span>
+          </div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-label"><span>CP Stock</span><span>230 CP</span></div>
+          <div class="bar-track"><div class="bar-fill stock" data-width="65"></div></div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-label"><span>CP Tuned</span><span>310 CP</span></div>
+          <div class="bar-track"><div class="bar-fill tuned" data-width="88"></div></div>
+        </div>
+        <div class="result-gains">
+          <div class="gain"><div class="val">+80 CP</div><div class="lbl">Putere</div></div>
+          <div class="gain"><div class="val">+100 Nm</div><div class="lbl">Cuplu</div></div>
+          <div class="gain"><div class="val">-0.5L</div><div class="lbl">Consum</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CALCULATOR ═══════════ -->
+<section class="section" id="calculator">
+  <div class="container">
+    <div class="section-title reveal">
+      <div class="label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
+        Calculator
+      </div>
+      <h2>Estimează Prețul</h2>
+      <p>Alege tipul de combustibil și serviciul dorit pentru o estimare rapidă.</p>
+    </div>
+    <div class="calc-wrap reveal">
+      <div class="calc-row">
+        <label>Combustibil</label>
+        <select id="calcFuel">
+          <option value="">— Selectează —</option>
+          <option value="diesel">Diesel</option>
+          <option value="benzina">Benzină</option>
+          <option value="hybrid">Hybrid</option>
+        </select>
+      </div>
+      <div class="calc-row">
+        <label>Serviciu</label>
+        <select id="calcService">
+          <option value="">— Selectează —</option>
+          <option value="stage1">Stage 1 — Software</option>
+          <option value="stage2">Stage 2 — Hardware + Software</option>
+          <option value="stage3">Stage 3+ — Racing</option>
+          <option value="dpf">DPF/EGR Delete</option>
+          <option value="adblue">AdBlue Off</option>
+        </select>
+      </div>
+      <div class="calc-price">
+        <div class="amount" id="calcAmount">—</div>
+        <div class="details" id="calcDetails">Selectează combustibilul și serviciul</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- RESULTS -->
-  <section class="results" id="rezultate">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label reveal">Rezultate</div>
-        <h2 class="section-title reveal">Before & After</h2>
-        <p class="section-desc reveal">Câteva exemple reale de mașini tunate de noi.</p>
+<!-- ═══════════ PROCESS ═══════════ -->
+<section class="section" id="cum-lucram" style="background:rgba(255,255,255,.01)">
+  <div class="container">
+    <div class="section-title reveal">
+      <div class="label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Procesul
       </div>
-      <div class="results-grid">
-        <!-- Renault -->
-        <div class="result-card reveal">
-          <div class="result-car">
-            <span class="result-car-icon">🚗</span>
-            <span class="result-car-name">Renault 1.5 dCi</span>
-          </div>
-          <div class="result-bars">
-            <div class="result-bar-group">
-              <div class="result-bar-label"><span>CP</span><span>110 → <strong>140</strong></span></div>
-              <div class="result-bar"><div class="result-bar-fill" style="--fill: 70%"></div></div>
-            </div>
-            <div class="result-bar-group">
-              <div class="result-bar-label"><span>Nm</span><span>260 → <strong>320</strong></span></div>
-              <div class="result-bar"><div class="result-bar-fill" style="--fill: 75%"></div></div>
-            </div>
-          </div>
-          <div class="result-gain"><span>+30 CP / +60 Nm</span><small>Câștig Stage 1</small></div>
-        </div>
-        <!-- VW -->
-        <div class="result-card reveal reveal-delay-1">
-          <div class="result-car">
-            <span class="result-car-icon">🚙</span>
-            <span class="result-car-name">VW 2.0 TDI</span>
-          </div>
-          <div class="result-bars">
-            <div class="result-bar-group">
-              <div class="result-bar-label"><span>CP</span><span>150 → <strong>195</strong></span></div>
-              <div class="result-bar"><div class="result-bar-fill" style="--fill: 77%"></div></div>
-            </div>
-            <div class="result-bar-group">
-              <div class="result-bar-label"><span>Nm</span><span>340 → <strong>420</strong></span></div>
-              <div class="result-bar"><div class="result-bar-fill" style="--fill: 80%"></div></div>
-            </div>
-          </div>
-          <div class="result-gain"><span>+45 CP / +80 Nm</span><small>Câștig Stage 1</small></div>
-        </div>
-        <!-- BMW -->
-        <div class="result-card reveal reveal-delay-2">
-          <div class="result-car">
-            <span class="result-car-icon">🏎️</span>
-            <span class="result-car-name">BMW 320d</span>
-          </div>
-          <div class="result-bars">
-            <div class="result-bar-group">
-              <div class="result-bar-label"><span>CP</span><span>190 → <strong>240</strong></span></div>
-              <div class="result-bar"><div class="result-bar-fill" style="--fill: 79%"></div></div>
-            </div>
-            <div class="result-bar-group">
-              <div class="result-bar-label"><span>Nm</span><span>400 → <strong>490</strong></span></div>
-              <div class="result-bar"><div class="result-bar-fill" style="--fill: 82%"></div></div>
-            </div>
-          </div>
-          <div class="result-gain"><span>+50 CP / +90 Nm</span><small>Câștig Stage 1</small></div>
-        </div>
-        <!-- Audi -->
-        <div class="result-card reveal reveal-delay-3">
-          <div class="result-car">
-            <span class="result-car-icon">🚗</span>
-            <span class="result-car-name">Audi 2.0 TFSI</span>
-          </div>
-          <div class="result-bars">
-            <div class="result-bar-group">
-              <div class="result-bar-label"><span>CP</span><span>190 → <strong>245</strong></span></div>
-              <div class="result-bar"><div class="result-bar-fill" style="--fill: 78%"></div></div>
-            </div>
-            <div class="result-bar-group">
-              <div class="result-bar-label"><span>Nm</span><span>320 → <strong>420</strong></span></div>
-              <div class="result-bar"><div class="result-bar-fill" style="--fill: 81%"></div></div>
-            </div>
-          </div>
-          <div class="result-gain"><span>+55 CP / +100 Nm</span><small>Câștig Stage 1</small></div>
-        </div>
-      </div>
+      <h2>Cum Lucrăm</h2>
+      <p>Proces clar, transparent și profesional — de la primul contact până la testul final.</p>
     </div>
-  </section>
+    <div class="process-grid">
 
-  <!-- CALCULATOR -->
-  <section class="calculator" id="calculator">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label reveal">Calculator</div>
-        <h2 class="section-title reveal">Estimează Prețul</h2>
-        <p class="section-desc reveal">Alege mașina și serviciul — îți zicem cât costă.</p>
-      </div>
-      <div class="calc-box reveal">
-        <div class="form-row">
-          <div class="calc-group">
-            <label>Combustibil</label>
-            <select id="calcFuel" onchange="calcPrice()">
-              <option value="">Selectează...</option>
-              <option value="diesel">Diesel</option>
-              <option value="benzina">Benzină</option>
-              <option value="hybrid">Hybrid</option>
-            </select>
-          </div>
-          <div class="calc-group">
-            <label>Serviciu</label>
-            <select id="calcService" onchange="calcPrice()">
-              <option value="">Selectează...</option>
-              <option value="stage1">Stage 1</option>
-              <option value="stage2">Stage 2</option>
-              <option value="stage3">Stage 3+</option>
-              <option value="dpf">DPF / FAP Delete</option>
-              <option value="egr">EGR Delete</option>
-              <option value="adblue">AdBlue Delete</option>
-              <option value="dtc">DTC Remove</option>
-              <option value="popbang">Pop & Bang</option>
-            </select>
-          </div>
+      <div class="process-step reveal">
+        <div class="step-num">Pasul 1</div>
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
         </div>
-        <div class="calc-result" id="calcResult">
-          <h4>Estimare Preț</h4>
-          <div class="price" id="calcPrice">—</div>
-          <div class="estimate" id="calcEstimate"></div>
-          <div class="details" id="calcDetails"></div>
-        </div>
+        <h3>Diagnostic</h3>
+        <p>Citim ECU-ul, analizăm parametrii actuali și identificăm potențialul de optimizare.</p>
       </div>
+
+      <div class="process-step reveal">
+        <div class="step-num">Pasul 2</div>
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>
+        </div>
+        <h3>Backup</h3>
+        <p>Facem backup complet al fișierului original. Poți reveni oricând la setările din fabrică.</p>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="step-num">Pasul 3</div>
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <h3>Tuning</h3>
+        <p>Optimizăm harta ECU-ului: injecție, turbo, timing — totul calibrat pentru mașina ta.</p>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="step-num">Pasul 4</div>
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h3>Testare</h3>
+        <p>Testăm pe drum, verificăm parametrii și ne asigurăm că totul funcționează perfect.</p>
+      </div>
+
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PROCESS -->
-  <section class="process" id="proces">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label reveal">Procesul</div>
-        <h2 class="section-title reveal">Cum Lucrăm</h2>
-        <p class="section-desc reveal">Proces simplu, transparent și profesionist.</p>
+<!-- ═══════════ WHY US ═══════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-title reveal">
+      <div class="label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+        De ce noi
       </div>
-      <div class="process-grid">
-        <div class="process-step reveal">
-          <div class="step-num">01</div>
-          <div class="step-icon">📋</div>
-          <h4>Diagnostic</h4>
-          <p>Verificăm starea motorului, citim erorile și ne asigurăm că totul e OK.</p>
-        </div>
-        <div class="process-step reveal reveal-delay-1">
-          <div class="step-num">02</div>
-          <div class="step-icon">💾</div>
-          <h4>Backup Original</h4>
-          <p>Citim și salvăm fișierul original din ECU. Poți oricând restaura gratuit.</p>
-        </div>
-        <div class="process-step reveal reveal-delay-2">
-          <div class="step-num">03</div>
-          <div class="step-icon">⚡</div>
-          <h4>Tuning</h4>
-          <p>Modificăm hărțile de injecție, turbo și aprindere pentru performanță optimă.</p>
-        </div>
-        <div class="process-step reveal reveal-delay-3">
-          <div class="step-num">04</div>
-          <div class="step-icon">✅</div>
-          <h4>Testare</h4>
-          <p>Testăm pe drum, verificăm toți parametrii și ne asigurăm că totul e perfect.</p>
-        </div>
-      </div>
+      <h2>De Ce SOROCA TUNE?</h2>
+      <p>Experiență, profesionalism și rezultate demonstrate — iată ce ne definește.</p>
     </div>
-  </section>
+    <div class="why-grid">
 
-  <!-- WHY US -->
-  <section class="why-us" id="why">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label reveal">De Ce Noi</div>
-        <h2 class="section-title reveal">De Ce SorocaTune?</h2>
+      <div class="why-card reveal">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+        </div>
+        <h3>Garanție 100%</h3>
+        <p>Oferim garanție completă pentru fiecare tuning efectuat.</p>
       </div>
-      <div class="why-grid">
-        <div class="why-card reveal">
-          <div class="why-icon">🛡️</div>
-          <div><h4>Garanție pe Lucru</h4><p>Garanție 12 luni pe toate serviciile. Dacă ceva nu e OK, remediem gratuit.</p></div>
+
+      <div class="why-card reveal">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>
         </div>
-        <div class="why-card reveal reveal-delay-1">
-          <div class="why-icon">💾</div>
-          <div><h4>Backup Original Gratuit</h4><p>Salvăm mereu fișierul original. Revenire gratuită la setările din fabrică.</p></div>
-        </div>
-        <div class="why-card reveal reveal-delay-2">
-          <div class="why-icon">⏱️</div>
-          <div><h4>Rapid și Profesionist</h4><p>Întreaga procedură durează 30-60 minute. Fără complicații.</p></div>
-        </div>
-        <div class="why-card reveal reveal-delay-3">
-          <div class="why-icon">🔧</div>
-          <div><h4>Echipament Profesional</h4><p>Alientech KESS/K-TAG — standard mondial în chip tuning.</p></div>
-        </div>
-        <div class="why-card reveal reveal-delay-4">
-          <div class="why-icon">📱</div>
-          <div><h4>Suport Post-Tuning</h4><p>Rămânem în contact după tuning. Orice întrebare — sună sau scrie.</p></div>
-        </div>
-        <div class="why-card reveal reveal-delay-5">
-          <div class="why-icon">💰</div>
-          <div><h4>Prețuri Corecte</h4><p>Prețuri transparente, fără surprize. Plătești doar ce alegi.</p></div>
-        </div>
+        <h3>Backup Original</h3>
+        <p>Păstrăm fișierul original — poți reveni oricând la setările din fabrică.</p>
       </div>
+
+      <div class="why-card reveal">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 13"/></svg>
+        </div>
+        <h3>Rapiditate</h3>
+        <p>Majoritatea tuning-urilor se finalizează în 1-3 ore.</p>
+      </div>
+
+      <div class="why-card reveal">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <h3>Echipament Pro</h3>
+        <p>Folosim echipamente profesionale KESS, KTAG, CMD și altele.</p>
+      </div>
+
+      <div class="why-card reveal">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></svg>
+        </div>
+        <h3>Suport Post-Tuning</h3>
+        <p>Suntem disponibili pentru ajustări și consultanță și după finalizare.</p>
+      </div>
+
+      <div class="why-card reveal">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
+        </div>
+        <h3>Prețuri Corecte</h3>
+        <p>Prețuri transparente, fără costuri ascunse. Plătești doar ce alegi.</p>
+      </div>
+
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- TESTIMONIALS -->
-  <section class="testimonials" id="recenzii">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label reveal">Recenzii</div>
-        <h2 class="section-title reveal">Ce Zic Clienții</h2>
-        <p class="section-desc reveal">Recenzii reale de la clienți mulțumiți.</p>
+<!-- ═══════════ TESTIMONIALS ═══════════ -->
+<section class="section" id="recenzii" style="background:rgba(255,255,255,.01)">
+  <div class="container">
+    <div class="section-title reveal">
+      <div class="label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Recenzii
       </div>
-      <div class="testimonials-grid">
-        <div class="testimonial-card reveal">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"Am făcut Stage 1 pe BMW 320d și diferența e uriașă. Trage mult mai bine, consumul a scăzut. Profesioniști adevărați!"</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">A</div>
-            <div><div class="testimonial-name">Andrei M.</div><div class="testimonial-car">BMW 320d 190CP</div></div>
-          </div>
+      <h2>Ce Spun Clienții Noștri</h2>
+      <p>Satisfația clienților este cea mai bună recomandare.</p>
+    </div>
+    <div class="reviews-grid">
+
+      <div class="review-card reveal">
+        <div class="review-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
-        <div class="testimonial-card reveal reveal-delay-1">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"VW Golf TDI tunat Stage 1. Rezultatul e incredibil — mașina e altceva. Recomand cu încredere, băieții știu ce fac!"</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">I</div>
-            <div><div class="testimonial-name">Ion C.</div><div class="testimonial-car">VW Golf 2.0 TDI 150CP</div></div>
-          </div>
-        </div>
-        <div class="testimonial-card reveal reveal-delay-2">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"Am scăpat de problemele cu DPF-ul. Mașina merge perfect acum, nici o eroare. Rapid, profesional, preț corect."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">V</div>
-            <div><div class="testimonial-name">Vasile D.</div><div class="testimonial-car">Renault 1.5 dCi</div></div>
+        <p class="review-text">"Am venit cu un VW 2.0 TDI și am plecat cu o altă mașină. Diferența e uriașă — accelerează mult mai bine și consumul a scăzut. Profesionalism la maxim!"</p>
+        <div class="review-author">
+          <div class="review-avatar">AI</div>
+          <div>
+            <div class="review-name">Andrei I.</div>
+            <div class="review-car">VW Golf 2.0 TDI</div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- GALLERY -->
-  <section class="gallery" id="galerie">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label reveal">Galerie</div>
-        <h2 class="section-title reveal">Mașinile Noastre</h2>
-        <p class="section-desc reveal">Câteva proiecte recente. Adaugă poze cu mașini tunate.</p>
-      </div>
-      <div class="gallery-grid">
-        <div class="gallery-item reveal">
-          <div class="gallery-placeholder"><span class="icon">📸</span>Adaugă poză</div>
+      <div class="review-card reveal">
+        <div class="review-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
-        <div class="gallery-item reveal reveal-delay-1">
-          <div class="gallery-placeholder"><span class="icon">📸</span>Adaugă poză</div>
-        </div>
-        <div class="gallery-item reveal reveal-delay-2">
-          <div class="gallery-placeholder"><span class="icon">📸</span>Adaugă poză</div>
-        </div>
-        <div class="gallery-item reveal reveal-delay-3">
-          <div class="gallery-placeholder"><span class="icon">📸</span>Adaugă poză</div>
-        </div>
-        <div class="gallery-item reveal reveal-delay-4">
-          <div class="gallery-placeholder"><span class="icon">📸</span>Adaugă poză</div>
-        </div>
-        <div class="gallery-item reveal reveal-delay-5">
-          <div class="gallery-placeholder"><span class="icon">📸</span>Adaugă poză</div>
+        <p class="review-text">"Am făcut Stage 1 pe BMW 320d și sunt extrem de mulțumit. Mașina trage mult mai bine, cuplul e fantastic. Recomand cu încredere!"</p>
+        <div class="review-author">
+          <div class="review-avatar">MC</div>
+          <div>
+            <div class="review-name">Mihai C.</div>
+            <div class="review-car">BMW 320d</div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label reveal">Contact</div>
-        <h2 class="section-title reveal">Programează-te Acum</h2>
-        <p class="section-desc reveal">Completează formularul sau contactează-ne direct.</p>
+      <div class="review-card reveal">
+        <div class="review-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-text">"Profesioniști adevărați! Au explicat tot procesul, au făcut backup și mașina merge perfect. Aștept de mult să fac tuning-ul și acum regret că nu am venit mai devreme."</p>
+        <div class="review-author">
+          <div class="review-avatar">DV</div>
+          <div>
+            <div class="review-name">Dragoș V.</div>
+            <div class="review-car">Audi A4 2.0 TFSI</div>
+          </div>
+        </div>
       </div>
-      <div class="contact-grid">
-        <div class="contact-info reveal">
-          <h3>Date de Contact</h3>
-          <p>Suntem disponibili zilnic pentru programări și consultanță gratuită.</p>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ GALLERY ═══════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-title reveal">
+      <div class="label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+        Galerie
+      </div>
+      <h2>Galerie Foto</h2>
+      <p>Momentan lucrăm la galeria cu poze reale. Până atunci, iată locurile rezervate.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal"><svg viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg><span>Foto 1</span></div>
+      <div class="gallery-item reveal"><svg viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg><span>Foto 2</span></div>
+      <div class="gallery-item reveal"><svg viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg><span>Foto 3</span></div>
+      <div class="gallery-item reveal"><svg viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg><span>Foto 4</span></div>
+      <div class="gallery-item reveal"><svg viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg><span>Foto 5</span></div>
+      <div class="gallery-item reveal"><svg viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg><span>Foto 6</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<section class="section" id="contact" style="background:rgba(255,255,255,.01)">
+  <div class="container">
+    <div class="section-title reveal">
+      <div class="label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Contact
+      </div>
+      <h2>Programează-te Acum</h2>
+      <p>Contactează-ne pentru o consultanță gratuită și o ofertă personalizată.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="contact-info-list">
           <div class="contact-item">
-            <span class="icon">📞</span>
+            <div class="icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
             <div>
-              <div class="label">Telefon / WhatsApp</div>
-              <div class="value"><a href="tel:+37367515744">067 515 744</a></div>
+              <strong>Telefon</strong>
+              <span>+373 XXX XXX XX</span>
             </div>
           </div>
           <div class="contact-item">
-            <span class="icon">📧</span>
+            <div class="icon-wrap">
+              <svg viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </div>
             <div>
-              <div class="label">Email</div>
-              <div class="value"><a href="mailto:sorocatune@gmail.com">sorocatune@gmail.com</a></div>
+              <strong>Email</strong>
+              <span>contact@sorocatune.md</span>
             </div>
           </div>
           <div class="contact-item">
-            <span class="icon">📍</span>
+            <div class="icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
             <div>
-              <div class="label">Locație</div>
-              <div class="value">Soroca, Republica Moldova</div>
+              <strong>Locație</strong>
+              <span>Soroca, Moldova</span>
             </div>
           </div>
           <div class="contact-item">
-            <span class="icon">🕐</span>
+            <div class="icon-wrap">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 13"/></svg>
+            </div>
             <div>
-              <div class="label">Program</div>
-              <div class="value">Luni - Sâmbătă: 09:00 - 18:00</div>
+              <strong>Program</strong>
+              <span>Luni - Sâmbătă: 09:00 - 18:00</span>
             </div>
           </div>
-        </div>
-        <div class="contact-form reveal reveal-delay-1">
-          <form id="contactForm" onsubmit="handleSubmit(event)">
-            <div class="form-row">
-              <div class="form-group">
-                <label>Nume</label>
-                <input type="text" placeholder="Numele tău" required>
-              </div>
-              <div class="form-group">
-                <label>Telefon</label>
-                <input type="tel" placeholder="06X XXX XXX" required>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Mașina</label>
-              <input type="text" placeholder="Ex: BMW 320d 2019 190CP">
-            </div>
-            <div class="form-group">
-              <label>Serviciu dorit</label>
-              <select required>
-                <option value="">Selectează serviciul</option>
-                <option>Stage 1 — Software Only</option>
-                <option>Stage 2 — Software + Hardware</option>
-                <option>Stage 3+ — Full Build</option>
-                <option>DPF / FAP Delete</option>
-                <option>EGR Delete</option>
-                <option>AdBlue Delete</option>
-                <option>Altele</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Mesaj (opțional)</label>
-              <textarea placeholder="Detalii suplimentare..."></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-submit">🚀 Trimite Programarea</button>
-            <div class="form-toast" id="formToast">✅ Programare trimisă cu succes! Te contactăm în curând.</div>
-          </form>
         </div>
       </div>
+      <div class="reveal">
+        <form class="contact-form" id="contactForm">
+          <input type="text" name="name" placeholder="Numele tău" required>
+          <input type="tel" name="phone" placeholder="Telefon" required>
+          <input type="text" name="car" placeholder="Mașina (ex: VW Golf 2.0 TDI)">
+          <select name="service">
+            <option value="">Selectează serviciul</option>
+            <option value="stage1">Stage 1 — Software</option>
+            <option value="stage2">Stage 2 — Hardware + Software</option>
+            <option value="stage3">Stage 3+ — Racing</option>
+            <option value="dpf">DPF/EGR Delete</option>
+            <option value="adblue">AdBlue Off</option>
+            <option value="other">Alt serviciu</option>
+          </select>
+          <textarea name="message" placeholder="Mesajul tău (opțional)"></textarea>
+          <button type="submit" class="btn btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg>
+            Trimite Cererea
+          </button>
+        </form>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2025 <span>SOROCATUNE</span> — Chip Tuning Profesional în Soroca, Moldova</p>
-    </div>
-  </footer>
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <div class="container">
+    &copy; 2024 SOROCA TUNE. Toate drepturile rezervate.
+  </div>
+</footer>
 
-  <!-- WHATSAPP FLOAT -->
-  <a href="https://wa.me/37367515744" target="_blank" class="wa-float" aria-label="WhatsApp">
-    <svg viewBox="0 0 32 32"><path d="M16.004 0h-.008C7.174 0 0 7.176 0 16c0 3.5 1.132 6.742 3.054 9.378L1.054 31.29l6.166-1.968C9.77 30.932 12.76 32 16.004 32 24.826 32 32 24.822 32 16S24.826 0 16.004 0zm9.31 22.604c-.39 1.1-1.932 2.014-3.168 2.28-.846.18-1.95.322-5.67-1.218-4.762-1.97-7.826-6.81-8.064-7.126-.23-.316-1.932-2.574-1.932-4.908s1.224-3.482 1.658-3.96c.434-.478.948-.598 1.264-.598.316 0 .632.004.908.016.292.014.684-.11 1.07.816.39.948 1.326 3.234 1.442 3.468.116.234.194.508.04.816-.156.316-.234.508-.468.786-.234.278-.492.62-.702.832-.234.234-.478.488-.204.956.272.468 1.214 2.002 2.606 3.244 1.788 1.596 3.296 2.09 3.764 2.324.468.234.742.196 1.014-.118.278-.316 1.186-1.382 1.502-1.858.316-.478.632-.39 1.07-.234.434.156 2.768 1.306 3.242 1.544.468.234.786.352.902.548.118.194.118 1.136-.272 2.238z"/></svg>
-  </a>
+<!-- ═══════════ WHATSAPP FLOAT ═══════════ -->
+<a href="https://wa.me/373XXXXXXXXX" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16.004 0h-.008C7.174 0 0 7.176 0 16.002c0 3.5 1.132 6.742 3.054 9.378L1.056 31.21l5.998-1.924C9.592 30.924 12.66 32 16.004 32 24.826 32 32 24.824 32 16.002 32 7.176 24.826 0 16.004 0zm9.302 22.602c-.39 1.1-1.932 2.014-3.168 2.28-.846.18-1.95.322-5.666-1.218-4.762-1.97-7.826-6.81-8.064-7.126-.23-.316-1.928-2.568-1.928-4.896s1.22-3.474 1.654-3.95c.39-.432.852-.54 1.136-.54.142 0 .268.008.382.014.434.018.652.044.938.726.358.852 1.228 2.99 1.334 3.21.108.216.216.504.072.796-.136.3-.256.432-.472.68-.216.248-.422.438-.638.706-.2.236-.424.488-.178.924.248.432 1.102 1.816 2.366 2.94 1.626 1.448 2.996 1.896 3.424 2.104.35.17.764.136 1.008-.158.31-.384.694-1.018 1.084-1.642.278-.436.628-.488 1.056-.328.436.152 2.734 1.29 3.202 1.524.468.236.776.352.892.548.116.196.116 1.126-.274 2.226z" fill="#fff"/>
+  </svg>
+</a>
 
-  <!-- BACK TO TOP -->
-  <button class="back-top" id="backTop" onclick="window.scrollTo({top:0})">↑</button>
+<!-- ═══════════ BACK TO TOP ═══════════ -->
+<button class="back-top" id="backTop" aria-label="Înapoi sus">
+  <svg viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></svg>
+</button>
 
-  <script>
-    // ===== NAV SCROLL =====
-    const nav = document.getElementById('nav');
-    const backTop = document.getElementById('backTop');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 50);
-      backTop.classList.toggle('show', window.scrollY > 600);
-    });
+<!-- ═══════════ JAVASCRIPT ═══════════ -->
+<script>
+(function(){
+  // ─── Nav scroll ───
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>{
+    nav.classList.toggle('scrolled',window.scrollY>50);
+    const btn=document.getElementById('backTop');
+    btn.classList.toggle('visible',window.scrollY>600);
+  });
 
-    // ===== MOBILE MENU =====
-    const navToggle = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('active');
-      navLinks.classList.toggle('open');
-    });
-    function closeMenu() {
-      navToggle.classList.remove('active');
-      navLinks.classList.remove('open');
-    }
+  // ─── Mobile menu ───
+  const toggle=document.getElementById('mobileToggle');
+  const links=document.getElementById('navLinks');
+  toggle.addEventListener('click',()=>{toggle.classList.toggle('open');links.classList.toggle('open')});
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{toggle.classList.remove('open');links.classList.remove('open')}));
 
-    // ===== SCROLL REVEAL =====
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  // ─── Reveal on scroll ───
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-    // ===== RESULT BAR ANIMATION =====
-    const barObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.querySelectorAll('.result-bar-fill').forEach((bar, i) => {
-            setTimeout(() => bar.classList.add('animated'), i * 150);
-          });
-        }
-      });
-    }, { threshold: 0.3 });
-    document.querySelectorAll('.result-card').forEach(card => barObserver.observe(card));
-
-    // ===== COUNTER ANIMATION =====
-    const counterObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const target = parseInt(el.dataset.target);
-          let current = 0;
-          const increment = target / 60;
-          const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-              el.textContent = target;
-              clearInterval(timer);
-            } else {
-              el.textContent = Math.floor(current);
-            }
-          }, 25);
-          counterObserver.unobserve(el);
-        }
-      });
-    }, { threshold: 0.5 });
-    document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
-
-    // ===== PRICE CALCULATOR =====
-    const pricing = {
-      stage1: { diesel: { price: '150-250€', cp: '+15-40%', torque: '+20-50%', time: '~45 min' }, benzina: { price: '200-350€', cp: '+20-50%', torque: '+25-60%', time: '~45 min' }, hybrid: { price: '200-350€', cp: '+15-35%', torque: '+20-45%', time: '~60 min' } },
-      stage2: { diesel: { price: '250-400€', cp: '+30-50%', torque: '+40-70%', time: '~2-3 ore' }, benzina: { price: '300-500€', cp: '+35-60%', torque: '+40-70%', time: '~2-3 ore' }, hybrid: { price: '300-500€', cp: '+25-45%', torque: '+30-50%', time: '~3-4 ore' } },
-      stage3: { diesel: { price: '500-1000€+', cp: '+50-100%', torque: '+60-120%', time: '1-3 zile' }, benzina: { price: '600-1500€+', cp: '+60-150%', torque: '+70-150%', time: '1-3 zile' }, hybrid: { price: '600-1200€+', cp: '+40-80%', torque: '+50-90%', time: '1-3 zile' } },
-      dpf: { price: '80-150€', label: 'DPF / FAP Delete' },
-      egr: { price: '80-120€', label: 'EGR Delete' },
-      adblue: { price: '100-200€', label: 'AdBlue Delete' },
-      dtc: { price: '50-100€', label: 'DTC Remove' },
-      popbang: { price: '80-150€', label: 'Pop & Bang' }
-    };
-
-    function calcPrice() {
-      const fuel = document.getElementById('calcFuel').value;
-      const service = document.getElementById('calcService').value;
-      const result = document.getElementById('calcResult');
-      const priceEl = document.getElementById('calcPrice');
-      const estimateEl = document.getElementById('calcEstimate');
-      const detailsEl = document.getElementById('calcDetails');
-
-      if (!fuel || !service) { result.classList.remove('show'); return; }
-
-      const data = pricing[service];
-      if (data[fuel]) {
-        const d = data[fuel];
-        priceEl.textContent = d.price;
-        estimateEl.textContent = 'Preț estimativ — poate varia în funcție de mașină';
-        detailsEl.innerHTML = `
-          <div class="detail-item"><div class="val">${d.cp}</div><div class="lbl">Câștig CP</div></div>
-          <div class="detail-item"><div class="val">${d.torque}</div><div class="lbl">Câștig Cuplu</div></div>
-        `;
-      } else if (data.price) {
-        priceEl.textContent = data.price;
-        estimateEl.textContent = data.label;
-        detailsEl.innerHTML = '';
+  // ─── Progress bars ───
+  const barObs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.style.width=e.target.dataset.width+'%';
+        barObs.unobserve(e.target);
       }
-      result.classList.add('show');
-    }
-
-    // ===== CONTACT FORM =====
-    function handleSubmit(e) {
-      e.preventDefault();
-      const form = e.target;
-      const btn = form.querySelector('.btn-submit');
-      const toast = document.getElementById('formToast');
-      const fields = form.querySelectorAll('input, select, textarea');
-      
-      // Collect form data
-      const booking = {
-        name: fields[0].value,
-        phone: fields[1].value,
-        car: fields[2].value,
-        service: fields[3].value,
-        message: fields[4] ? fields[4].value : '',
-        date: new Date().toLocaleDateString('ro-RO'),
-        status: 'pending'
-      };
-      
-      btn.textContent = '⏳ Se trimite...';
-      btn.disabled = true;
-      
-      setTimeout(() => {
-        // Save to localStorage (admin reads from here)
-        const bookings = JSON.parse(localStorage.getItem('st_bookings') || '[]');
-        bookings.push(booking);
-        localStorage.setItem('st_bookings', JSON.stringify(bookings));
-        
-        toast.classList.add('show');
-        btn.textContent = '✅ Trimis!';
-        form.reset();
-        setTimeout(() => {
-          btn.textContent = '🚀 Trimite Programarea';
-          btn.disabled = false;
-          toast.classList.remove('show');
-        }, 4000);
-      }, 1500);
-    }
-
-    // ===== SMOOTH SCROLL OFFSET =====
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', (e) => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          const y = target.getBoundingClientRect().top + window.pageYOffset - 80;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-        }
-      });
     });
-  </script>
+  },{threshold:0.3});
+  document.querySelectorAll('.bar-fill').forEach(b=>barObs.observe(b));
+
+  // ─── Counter animation ───
+  const counterObs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const el=e.target;
+        const target=parseInt(el.dataset.target);
+        let current=0;
+        const step=Math.ceil(target/60);
+        const timer=setInterval(()=>{
+          current+=step;
+          if(current>=target){current=target;clearInterval(timer)}
+          el.textContent=current+(target>=100?'+':'%');
+        },30);
+        counterObs.unobserve(el);
+      }
+    });
+  },{threshold:0.5});
+  document.querySelectorAll('.stat-number').forEach(el=>counterObs.observe(el));
+
+  // ─── Price calculator ───
+  const prices={
+    diesel:{stage1:[1200,1600],stage2:[2000,2800],stage3:[3500,6000],dpf:[800,1200],adblue:[600,1000]},
+    benzina:{stage1:[1400,1800],stage2:[2200,3200],stage3:[4000,7000],dpf:[900,1300],adblue:[700,1100]},
+    hybrid:{stage1:[1600,2000],stage2:[2500,3500],stage3:[4500,8000],dpf:[1000,1400],adblue:[800,1200]}
+  };
+  const fuelEl=document.getElementById('calcFuel');
+  const serviceEl=document.getElementById('calcService');
+  const amountEl=document.getElementById('calcAmount');
+  const detailsEl=document.getElementById('calcDetails');
+  function calcPrice(){
+    const f=fuelEl.value,s=serviceEl.value;
+    if(!f||!s){amountEl.textContent='—';detailsEl.textContent='Selectează combustibilul și serviciul';return}
+    const range=prices[f]?.[s];
+    if(!range){amountEl.textContent='—';detailsEl.textContent='Combinație indisponibilă';return}
+    amountEl.textContent=range[0]+' — '+range[1]+' MDL';
+    detailsEl.textContent='Preț estimativ. Contactează-ne pentru oferta exactă.';
+  }
+  fuelEl.addEventListener('change',calcPrice);
+  serviceEl.addEventListener('change',calcPrice);
+
+  // ─── Contact form ───
+  document.getElementById('contactForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    const fd=new FormData(this);
+    const data=Object.fromEntries(fd.entries());
+    const submissions=JSON.parse(localStorage.getItem('sorocatune_submissions')||'[]');
+    submissions.push({time:new Date().toISOString(),data});
+    localStorage.setItem('sorocatune_submissions',JSON.stringify(submissions));
+    alert('Cererea a fost trimisă cu succes! Te vom contacta în curând.');
+    this.reset();
+  });
+
+  // ─── Back to top ───
+  document.getElementById('backTop').addEventListener('click',()=>{
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+})();
+</script>
+
 </body>
 </html>
